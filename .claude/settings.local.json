@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(which node *)",
+      "Read(//usr/local/bin/**)",
+      "Read(//Users/annevandenborn/.nvm/versions/**)",
+      "Read(//Users/annevandenborn/.n/**)",
+      "Read(//usr/**)",
+      "Read(//opt/**)",
+      "Bash(CLAUDE_CODE_TMPDIR=/tmp/ccwork node --version)",
+      "Bash(CLAUDE_CODE_TMPDIR=/tmp/ccwork /usr/local/bin/node --version)",
+      "Read(//Users/annevandenborn/**)",
+      "Bash(command -v bun)",
+      "Bash(npx tsc *)",
+      "Bash(xargs cat)",
+      "Bash(mkdir -p \"/Users/annevandenborn/Desktop/MeesterProef - Music Feels Different At Night/public/videos\")",
+      "Bash(cp \"/Users/annevandenborn/Desktop/MeesterProef - Music Feels Different At Night/Noah Kahan - Willing and Able \\(Official Lyric Video\\).mp4\" \"/Users/annevandenborn/Desktop/MeesterProef - Music Feels Different At Night/public/videos/willing-and-able.mp4\")",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(npm run *)"
+    ]
+  }
+}

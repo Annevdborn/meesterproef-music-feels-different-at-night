@@ -1,0 +1,36 @@
+import type { Metadata } from 'next'
+import { Playfair_Display, DM_Sans } from 'next/font/google'
+import './globals.css'
+import CustomCursor from '@/components/CustomCursor'
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-playfair',
+  display: 'swap',
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+})
+
+export const metadata: Metadata = {
+  title: 'Music Feels Different At Night',
+  description: 'A personal, emotional experience built around five songs that each represent a memory, feeling or moment.',
+  openGraph: {
+    title: 'Music Feels Different At Night',
+    description: 'Five records. Five memories. Listen in the dark.',
+  },
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="nl" className={`${playfair.variable} ${dmSans.variable}`}>
+      <body>
+        <CustomCursor />
+        {children}
+      </body>
+    </html>
+  )
+}
