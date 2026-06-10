@@ -19,6 +19,7 @@ export default function RecordRoom() {
 
   return (
     <section className="relative" aria-label="Record Collection">
+      <div id="record-room-trigger" className="absolute top-0" />
       <div className="py-24">
         <RecordShelf onOpenSleeve={setActiveSong} />
       </div>
