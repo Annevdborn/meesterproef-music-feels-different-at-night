@@ -96,7 +96,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                         className="font-sans text-[9px] tracking-[0.35em] uppercase mb-4"
                         style={{ color: `${song.coverAccent}90` }}
                       >
-                        {song.emotion} — {song.year}
+                        for me this is {song.emotion} · {song.year}
                       </p>
                       <h3 className="font-serif text-[clamp(1.2rem,2.5vw,1.8rem)] text-cream leading-tight mb-1">
                         {song.title}
@@ -123,7 +123,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                           borderBottom: `1px solid ${page === 0 ? song.coverAccent : 'transparent'}`,
                         }}
                       >
-                        Story
+                        My Story
                       </button>
                       <button
                         onClick={() => { setSlideDir(1); setPage(1) }}
@@ -157,7 +157,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                               style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
                             >
                               <p className="font-sans text-[9px] tracking-[0.3em] uppercase mb-4" style={{ color: `${song.coverAccent}70` }}>
-                                About this song
+                                What this song is about
                               </p>
                               <p className="font-sans text-[13px] md:text-[14px] leading-[1.85] text-cream-muted">
                                 {song.artistMeaning}
@@ -171,7 +171,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                               style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
                             >
                               <p className="font-sans text-[9px] tracking-[0.3em] uppercase mb-5" style={{ color: `${song.coverAccent}70` }}>
-                                Personal liner note
+                                Why I chose this song
                               </p>
                               <div className="space-y-4">
                                 {song.linerNote.split('\n\n').map((para, i) => {

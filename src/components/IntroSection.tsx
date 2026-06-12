@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
-const body = `Some songs don't belong on a playlist. You keep them inside yourself. Tied to a person, an evening, a feeling you can't quite put into words. Music has been a part of my life since before I was even born. But it's only when the day is over and the world goes quiet that it really gets through. That's when you hear things in a song that simply aren't there in the afternoon. Sharper. Closer. I could have chosen hundreds, but these five each carry their own weight. I'm not sharing them to explain. Just to let you feel it too.`
+const body = `Some songs don't belong on a playlist. You keep them inside yourself. Tied to a person, an evening, a feeling you can't quite put into words. Music has been a part of my life since before I was even born. But it's only when the day is over and the world goes quiet that it really gets through. That's when you hear things in a song that simply aren't there in the afternoon. Sharper. Closer. I could have chosen hundreds, but these five each carry their own weight. I'm not sharing my songs to explain. Just to let you feel it too.`
 
 export default function IntroSection() {
   const ref = useRef<HTMLDivElement>(null)
@@ -20,7 +20,7 @@ export default function IntroSection() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
         >
-          "A Note Before You Listen"
+          "A Note From Me"
         </motion.h2>
 
         {/* Divider */}
@@ -40,6 +40,15 @@ export default function IntroSection() {
           transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
         >
           {body}
+        </motion.p>
+
+        <motion.p
+          className="font-serif text-[14px] md:text-[15px] italic text-cream-dim mt-10 md:pl-4"
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.9, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        >
+          Each record has a personal note. Click to read mine.
         </motion.p>
       </div>
     </section>

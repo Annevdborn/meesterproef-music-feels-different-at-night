@@ -194,12 +194,172 @@ export default function VinylDisc({ song, isPlaying, isSpinning, rpm, audioRef }
             </radialGradient>
           </defs>
 
-          <circle cx="200" cy="200" r="198" fill="#0c0c0c" />
+          <circle cx="200" cy="200" r="198" fill={
+            song.id === 1 ? '#f5c400' :
+            song.id === 2 ? '#0a1208' :
+            song.id === 3 ? '#0e0604' :
+            song.id === 4 ? '#060d14' :
+            song.id === 5 ? '#100202' :
+            '#0c0c0c'
+          } />
+
+          {/* Tie-dye yellow vinyl for Pocket Full of Sunshine */}
+          {song.id === 1 && (
+            <>
+              <defs>
+                {/* Cream/white tie-dye layer */}
+                <filter id={`tiedye-a-${song.id}`} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
+                  <feTurbulence type="turbulence" baseFrequency="0.014 0.014" numOctaves="5" seed="4" result="t" />
+                  <feColorMatrix type="matrix" in="t"
+                    values="0 0 0 0 1  0 0 0 0 0.97  0 0 0 0 0.82  0 0 6 -2.8 0"
+                    result="cream" />
+                  <feComposite in="cream" in2="SourceGraphic" operator="in" />
+                </filter>
+                {/* Deep yellow layer */}
+                <filter id={`tiedye-b-${song.id}`} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
+                  <feTurbulence type="turbulence" baseFrequency="0.02 0.008" numOctaves="4" seed="9" result="t" />
+                  <feColorMatrix type="matrix" in="t"
+                    values="0 0 0 0 0.82  0 0 0 0 0.68  0 0 0 0 0  0 0 5 -2.5 0"
+                    result="deep" />
+                  <feComposite in="deep" in2="SourceGraphic" operator="in" />
+                </filter>
+                {/* Light yellow layer */}
+                <filter id={`tiedye-c-${song.id}`} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
+                  <feTurbulence type="turbulence" baseFrequency="0.01 0.018" numOctaves="3" seed="15" result="t" />
+                  <feColorMatrix type="matrix" in="t"
+                    values="0 0 0 0 1  0 0 0 0 0.96  0 0 0 0 0.55  0 0 7 -3.2 0"
+                    result="light" />
+                  <feComposite in="light" in2="SourceGraphic" operator="in" />
+                </filter>
+              </defs>
+              <circle cx="200" cy="200" r="198" fill="rgba(255,248,180,0.72)" filter={`url(#tiedye-c-${song.id})`} />
+              <circle cx="200" cy="200" r="198" fill="rgba(210,165,0,0.65)" filter={`url(#tiedye-b-${song.id})`} />
+              <circle cx="200" cy="200" r="198" fill="rgba(255,253,220,0.75)" filter={`url(#tiedye-a-${song.id})`} />
+            </>
+          )}
+
+          {/* Splatter vinyl for Willing and Able */}
+          {song.id === 2 && <>
+            <circle cx="200" cy="200" r="198" fill={`${song.coverAccent}22`} />
+            <ellipse cx="148" cy="130" rx="28" ry="18" fill={`${song.coverAccent}30`} transform="rotate(-25 148 130)" />
+            <ellipse cx="260" cy="155" rx="18" ry="32" fill={`${song.coverAccent}28`} transform="rotate(15 260 155)" />
+            <ellipse cx="310" cy="240" rx="22" ry="14" fill={`${song.coverAccent}25`} transform="rotate(40 310 240)" />
+            <ellipse cx="130" cy="280" rx="14" ry="24" fill={`${song.coverAccent}28`} transform="rotate(-10 130 280)" />
+            <ellipse cx="210" cy="320" rx="30" ry="12" fill={`${song.coverAccent}22`} transform="rotate(5 210 320)" />
+            <ellipse cx="80" cy="190" rx="12" ry="20" fill={`${song.coverAccent}20`} transform="rotate(30 80 190)" />
+            <circle cx="170" cy="95" r="8" fill={`${song.coverAccent}35`} />
+            <circle cx="290" cy="110" r="5" fill={`${song.coverAccent}40`} />
+            <circle cx="340" cy="200" r="7" fill={`${song.coverAccent}30`} />
+            <circle cx="105" cy="330" r="6" fill={`${song.coverAccent}35`} />
+            <circle cx="250" cy="355" r="9" fill={`${song.coverAccent}28`} />
+            <circle cx="60" cy="240" r="5" fill={`${song.coverAccent}38`} />
+            <circle cx="195" cy="60" r="4" fill={`${song.coverAccent}32`} />
+            <ellipse cx="330" cy="300" rx="10" ry="6" fill={`${song.coverAccent}25`} transform="rotate(60 330 300)" />
+          </>}
+
+          {/* Deep sea vinyl for For Keeps */}
+          {song.id === 4 && (
+            <>
+              <defs>
+                <radialGradient id={`sea-base-${song.id}`} cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#0d1e30" stopOpacity="1" />
+                  <stop offset="60%" stopColor="#070f1a" stopOpacity="1" />
+                  <stop offset="100%" stopColor="#020609" stopOpacity="1" />
+                </radialGradient>
+                {/* Barely-there depth currents */}
+                <filter id={`sea-current-${song.id}`} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
+                  <feTurbulence type="turbulence" baseFrequency="0.006 0.009" numOctaves="6" seed="22" result="t" />
+                  <feColorMatrix type="matrix" in="t"
+                    values="0 0 0 0 0.18  0 0 0 0 0.32  0 0 0 0 0.5  0 0 4 -2.0 0"
+                    result="c" />
+                  <feComposite in="c" in2="SourceGraphic" operator="in" />
+                </filter>
+                {/* Single cold light — like light filtering from far above */}
+                <filter id={`sea-light-${song.id}`} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
+                  <feTurbulence type="turbulence" baseFrequency="0.011 0.005" numOctaves="3" seed="41" result="t" />
+                  <feColorMatrix type="matrix" in="t"
+                    values="0 0 0 0 0.4  0 0 0 0 0.55  0 0 0 0 0.72  0 0 8 -6.2 0"
+                    result="l" />
+                  <feComposite in="l" in2="SourceGraphic" operator="in" />
+                </filter>
+              </defs>
+              <circle cx="200" cy="200" r="198" fill={`url(#sea-base-${song.id})`} />
+              <circle cx="200" cy="200" r="198" fill="rgba(30,60,100,0.6)" filter={`url(#sea-current-${song.id})`} />
+              <circle cx="200" cy="200" r="198" fill="rgba(104,136,164,0.35)" filter={`url(#sea-light-${song.id})`} />
+            </>
+          )}
+
+          {/* Techno splatter vinyl for Amore Dulce */}
+          {song.id === 3 && (
+            <>
+              <defs>
+                {/* Fine particles — high frequency speckle */}
+                <filter id={`techno-speck-${song.id}`} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
+                  <feTurbulence type="turbulence" baseFrequency="0.075 0.075" numOctaves="1" seed="6" result="t" />
+                  <feColorMatrix type="matrix" in="t"
+                    values="0 0 0 0 0.72  0 0 0 0 0.33  0 0 0 0 0.08  0 0 14 -9 0"
+                    result="s" />
+                  <feComposite in="s" in2="SourceGraphic" operator="in" />
+                </filter>
+                {/* Larger blobs — aggressive mid-frequency */}
+                <filter id={`techno-blob-${song.id}`} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
+                  <feTurbulence type="turbulence" baseFrequency="0.038 0.028" numOctaves="2" seed="2" result="t" />
+                  <feColorMatrix type="matrix" in="t"
+                    values="0 0 0 0 0.85  0 0 0 0 0.4  0 0 0 0 0.1  0 0 11 -7.5 0"
+                    result="b" />
+                  <feComposite in="b" in2="SourceGraphic" operator="in" />
+                </filter>
+                {/* Haze layer — dark rust wash */}
+                <filter id={`techno-haze-${song.id}`} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
+                  <feTurbulence type="turbulence" baseFrequency="0.012 0.02" numOctaves="3" seed="14" result="t" />
+                  <feColorMatrix type="matrix" in="t"
+                    values="0 0 0 0 0.6  0 0 0 0 0.22  0 0 0 0 0.04  0 0 4 -1.8 0"
+                    result="h" />
+                  <feComposite in="h" in2="SourceGraphic" operator="in" />
+                </filter>
+              </defs>
+              {/* Dark rust haze base */}
+              <circle cx="200" cy="200" r="198" fill={`${song.coverAccent}40`} filter={`url(#techno-haze-${song.id})`} />
+              {/* Mid blobs */}
+              <circle cx="200" cy="200" r="198" fill={`${song.coverAccent}cc`} filter={`url(#techno-blob-${song.id})`} />
+              {/* Fine specks on top */}
+              <circle cx="200" cy="200" r="198" fill={`${song.coverAccent}ff`} filter={`url(#techno-speck-${song.id})`} />
+            </>
+          )}
+
+          {/* Deep red vinyl for Earth Song */}
+          {song.id === 5 && (
+            <>
+              <defs>
+                <radialGradient id={`earth-grad-${song.id}`} cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#5c0a0a" stopOpacity="1" />
+                  <stop offset="45%" stopColor="#8c2010" stopOpacity="1" />
+                  <stop offset="80%" stopColor="#4a0808" stopOpacity="1" />
+                  <stop offset="100%" stopColor="#1a0202" stopOpacity="1" />
+                </radialGradient>
+                {/* Subtle smoke — barely there, just enough depth */}
+                <filter id={`earth-smoke-${song.id}`} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
+                  <feTurbulence type="turbulence" baseFrequency="0.009 0.013" numOctaves="4" seed="17" result="t" />
+                  <feColorMatrix type="matrix" in="t"
+                    values="0 0 0 0 0.6  0 0 0 0 0.04  0 0 0 0 0.04  0 0 3.5 -1.8 0"
+                    result="s" />
+                  <feComposite in="s" in2="SourceGraphic" operator="in" />
+                </filter>
+              </defs>
+              <circle cx="200" cy="200" r="198" fill={`url(#earth-grad-${song.id})`} />
+              <circle cx="200" cy="200" r="198" fill="rgba(160,20,10,0.45)" filter={`url(#earth-smoke-${song.id})`} />
+            </>
+          )}
+
           {Array.from({ length: GROOVE_COUNT }, (_, i) => {
             const r = 62 + i * 1.9
             return (
               <circle key={i} cx="200" cy="200" r={r} fill="none"
-                stroke={i % 4 === 0 ? '#222' : '#181818'} strokeWidth="0.7"
+                stroke={
+                  song.id === 1 ? (i % 4 === 0 ? 'rgba(120,70,0,0.4)' : 'rgba(100,55,0,0.22)') :
+                  song.id === 5 ? (i % 4 === 0 ? 'rgba(80,0,0,0.45)' : 'rgba(60,0,0,0.25)') :
+                  (i % 4 === 0 ? '#222' : '#181818')
+                } strokeWidth="0.7"
                 opacity={0.5 - i * 0.002} />
             )
           })}

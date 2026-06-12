@@ -239,7 +239,7 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
             className="font-sans text-[9px] tracking-[0.35em] uppercase mb-3"
             style={{ color: `${song.coverAccent}90` }}
           >
-            {song.emotion} — {song.year}
+            for me this is {song.emotion} · {song.year}
           </p>
 
           <h3 className="font-serif text-[clamp(1.4rem,2.8vw,2.4rem)] text-cream leading-tight mb-2">
@@ -250,18 +250,39 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
 
           <div className="h-px w-8 mb-5" style={{ background: `${song.coverAccent}50` }} />
 
-          <p className="font-serif text-[15px] md:text-[17px] leading-[1.75] text-cream-muted mb-8 whitespace-pre-line">
-            {song.story.split('. ').slice(0, 2).join('. ') + '.'}
+          <p className="font-sans text-[9px] tracking-[0.25em] uppercase mb-3" style={{ color: `${song.coverAccent}70` }}>
+            from my personal note
+          </p>
+
+          <p className="font-serif text-[15px] md:text-[17px] leading-[1.75] italic mb-8 whitespace-pre-line" style={{ color: `${song.coverAccent}dd` }}>
+            {song.story}
           </p>
 
           <motion.button
             onClick={() => onOpenSleeve(song)}
-            className="self-start font-sans text-[10px] tracking-[0.3em] uppercase text-cream-dim hover:text-cream transition-colors duration-300 pb-1"
-            style={{ borderBottom: '1px solid currentColor' }}
-            whileHover={{ x: 4 }}
-            transition={{ duration: 0.2 }}
+            className="self-start font-sans text-[11px] tracking-[0.25em] uppercase flex items-center gap-3 px-5 py-3 rounded-sm transition-all duration-300"
+            style={{
+              color: song.coverAccent,
+              border: `1px solid ${song.coverAccent}55`,
+              background: `${song.coverAccent}10`,
+              boxShadow: `0 0 18px 2px ${song.coverAccent}18`,
+            }}
+            whileHover={{
+              scale: 1.04,
+              boxShadow: `0 0 28px 6px ${song.coverAccent}35`,
+              background: `${song.coverAccent}20`,
+            }}
+            animate={{
+              boxShadow: [
+                `0 0 14px 2px ${song.coverAccent}15`,
+                `0 0 22px 5px ${song.coverAccent}30`,
+                `0 0 14px 2px ${song.coverAccent}15`,
+              ],
+            }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
           >
-            Read more
+            My story with this song
+            <span style={{ opacity: 0.75 }}>→</span>
           </motion.button>
         </div>
 
@@ -362,7 +383,7 @@ export default function RecordShelf({ onOpenSleeve }: RecordShelfProps) {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          5 songs · five feelings
+          My 5 songs · my five feelings
         </motion.p>
 
         <motion.h2

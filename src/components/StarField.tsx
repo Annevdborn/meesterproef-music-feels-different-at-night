@@ -65,7 +65,7 @@ export default function StarField() {
   }, [])
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
       {stars.map(star =>
         star.twinkle ? (
           <motion.div

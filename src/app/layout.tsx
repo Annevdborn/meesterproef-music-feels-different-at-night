@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Playfair_Display, DM_Sans } from 'next/font/google'
 import './globals.css'
 import CustomCursor from '@/components/CustomCursor'
+import GlobalStarField from '@/components/GlobalStarField'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="nl" className={`${playfair.variable} ${dmSans.variable}`}>
       <body>
+        <GlobalStarField />
         <CustomCursor />
         {children}
       </body>

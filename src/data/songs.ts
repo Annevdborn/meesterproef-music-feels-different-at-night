@@ -11,7 +11,7 @@ export const songs: Song[] = [
     coverAccent: '#f5c400',
     coverImage: '/covers/pocket-full-of-sunshine.jpg',
     audioSrc: '/audio/pocket-full-of-sunshine.mp3',
-    story: `"For three and a half minutes, I'm allowed to forget whatever was bothering me and just enjoy being alive.\nIt's impossible for me to listen to this song quietly.\nOne listen is never enough."`,
+    story: `Sometimes, especially late at night, I can get stuck in my own thoughts.\nI overthink things and replay conversations in my head.\nOr simply feel sad for reasons I can't always explain.`,
     artistMeaning: `Pocket Full of Sunshine is about having an inner sanctuary — a place inside yourself that no one can take from you. Natasha Bedingfield wrote it as an anthem of resilience, about knowing your own worth and refusing to let other people's negativity break you down. The "pocket full of sunshine" is a metaphor for that private emotional reserve you carry with you wherever you go.`,
     linerNote: `The moment this song starts playing, something changes.
 
@@ -137,7 +137,7 @@ A hiding place (A hiding place)`,
     coverAccent: '#7a9468',
     coverImage: '/covers/willing-and-able.jpg',
     audioSrc: '/audio/willing-and-able.mp3',
-    story: `"In those moments, the song feels bigger than music.\nIt becomes a conversation I'll probably never have exactly the way Noah sings it.\nBut if I ever found the right words, they would probably sound something like this"`,
+    story: `For me, this is what the song is really about.\nMissing someone who is still alive and still part of your life.\nBut no longer part of your everyday world.`,
     artistMeaning: `Willing and Able is Noah Kahan's portrait of a fractured sibling relationship — the push and pull of wanting closeness while being stuck in old patterns of conflict. He wrote it about the particular grief of someone who is still in your life but feels increasingly out of reach. The song captures the feeling of being simultaneously frustrated with someone and desperately wanting to be known by them.`,
     lyrics: `Verse 1
 Oh, when the weight left the room, did you take a deep breath?
@@ -256,7 +256,7 @@ But if I ever found the right words, they would probably sound something like th
     coverAccent: '#b05818',
     coverImage: '/covers/amor-dulce.jpg',
     audioSrc: '/audio/amor-dulce.mp3',
-    story: `"And I hope that one day I will hear it live at a festival.\nNot through headphones. Not alone in my room.\nBut in the middle of a crowd, feeling it properly, louder and heavier than I have ever experienced it before."`,
+    story: `It is hard for me to explain exactly why I chose it.\nThe first time I heard it, I got goosebumps immediately.\nIt was not something I analysed or understood, it just hit me.`,
     artistMeaning: `Amore Dulce is AEREA's exploration of love as a physical and almost overwhelming sensation — sweet to the point of being disorienting. The track blurs the line between euphoria and longing, using rhythm and texture to say what words alone cannot. It is less about a specific person and more about the feeling itself.`,
     linerNote: `This song feels completely different from the other ones I've written about.
 

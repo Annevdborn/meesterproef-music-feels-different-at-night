@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { useTimeOfDay } from '@/hooks/useTimeOfDay'
-import StarField from './StarField'
 
 const titleLines = ['Music Feels', 'Different', 'At Night']
 
@@ -44,10 +43,7 @@ export default function HeroSection() {
   const timeOfDay = useTimeOfDay()
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center">
-      {/* Starry sky */}
-      <StarField />
-
+    <section className="relative min-h-screen flex flex-col justify-center px-8 md:px-16 lg:px-24">
       {/* Ambient lamp glow */}
       <div className="lamp-glow" aria-hidden="true" />
 
@@ -116,7 +112,7 @@ export default function HeroSection() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 px-8 md:px-16 lg:px-24 max-w-[90rem] mx-auto w-full">
+      <div className="relative z-10 max-w-[90rem] mx-auto w-full">
         {/* Always-visible context line */}
         <motion.p
           className="text-[11px] tracking-[0.3em] uppercase text-amber-muted mb-8 font-sans"
@@ -124,7 +120,7 @@ export default function HeroSection() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 1 }}
         >
-          This experience is made for the dark
+          My experience is made for the dark
         </motion.p>
 
         {/* Main title */}
@@ -171,8 +167,8 @@ export default function HeroSection() {
         >
           <div className="h-px w-12 bg-amber-glow/40 mb-6" />
           <p className="font-sans text-[13px] leading-[1.8] tracking-wide text-cream-muted">
-            5 song • five feelings
-            <br />A personal collection from the hours after midnight.
+            My 5 songs • my five feelings
+            <br />My personal collection from the hours after midnight.
           </p>
         </motion.div>
       </div>
