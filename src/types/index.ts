@@ -15,6 +15,8 @@ export interface Song {
   favoriteEnd?: number   // timestamp in seconden waar het favoriete stuk eindigt
   artistMeaning?: string
   linerNote?: string
+  triggerWarning?: string
+  cursorHintColor?: string
   highlightedStanzas?: number[]
   highlightedLines?: string[]
   highlightedLinesByStanza?: Record<number, number[]>

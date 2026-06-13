@@ -175,20 +175,39 @@ export default function HeroSection() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
         variants={scrollVariants}
         initial="hidden"
         animate="visible"
         aria-hidden="true"
       >
-        <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-cream-dim">
-          scroll
-        </span>
-        <motion.div
-          className="w-px h-8 bg-gradient-to-b from-amber-glow/40 to-transparent"
-          animate={{ scaleY: [1, 0.4, 1], opacity: [0.6, 1, 0.6] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-        />
+        <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-center leading-relaxed"
+          style={{ color: 'rgba(200,169,110,0.7)' }}>
+          scroll for my<br />personal collection
+        </p>
+
+        {/* Three cascading chevrons */}
+        <div className="flex flex-col items-center gap-1 mt-1">
+          {[0, 0.18, 0.36].map((delay, i) => (
+            <motion.svg
+              key={i}
+              width="22"
+              height="12"
+              viewBox="0 0 22 12"
+              fill="none"
+              animate={{ opacity: [0.2, 1, 0.2], y: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut', delay }}
+            >
+              <path
+                d="M1 1L11 11L21 1"
+                stroke="rgba(200,169,110,1)"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </motion.svg>
+          ))}
+        </div>
       </motion.div>
     </section>
   )

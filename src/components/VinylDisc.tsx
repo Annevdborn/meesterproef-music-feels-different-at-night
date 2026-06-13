@@ -24,6 +24,8 @@ export default function VinylDisc({ song, isPlaying, isSpinning, rpm, audioRef }
   const lastScratchTime = useRef(0)
   const rafRef = useRef<number | null>(null)
   const [isGrabbing, setIsGrabbing] = useState(false)
+  const [isHovering, setIsHovering] = useState(false)
+  const tooltipRef = useRef<HTMLDivElement>(null)
 
   // Audio
   const audioCtxRef = useRef<AudioContext | null>(null)
@@ -31,6 +33,12 @@ export default function VinylDisc({ song, isPlaying, isSpinning, rpm, audioRef }
   const scratchSourceRef = useRef<AudioBufferSourceNode | null>(null)
   const scratchGainRef = useRef<GainNode | null>(null)
   const stopFadeRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    if (tooltipRef.current) {
+      tooltipRef.current.style.opacity = isHovering && !isGrabbing ? '1' : '0'
+    }
+  }, [isGrabbing, isHovering])
 
   const getAudioCtx = () => {
     if (!audioCtxRef.current) audioCtxRef.current = new AudioContext()
@@ -175,7 +183,36 @@ export default function VinylDisc({ song, isPlaying, isSpinning, rpm, audioRef }
       className="relative w-full aspect-square select-none"
       style={{ cursor: isGrabbing ? 'grabbing' : 'grab' }}
       onMouseDown={onMouseDown}
+      onMouseEnter={() => {
+        setIsHovering(true)
+        if (tooltipRef.current) tooltipRef.current.style.opacity = '1'
+      }}
+      onMouseLeave={() => {
+        setIsHovering(false)
+        if (tooltipRef.current) tooltipRef.current.style.opacity = '0'
+      }}
+      onMouseMove={(e) => {
+        const rect = containerRef.current?.getBoundingClientRect()
+        if (rect && tooltipRef.current) {
+          tooltipRef.current.style.left = `${e.clientX - rect.left + 14}px`
+          tooltipRef.current.style.top = `${e.clientY - rect.top - 10}px`
+        }
+      }}
     >
+      {/* Scratch tooltip — follows cursor, position updated via DOM to avoid re-renders */}
+      <div
+        ref={tooltipRef}
+        className="absolute pointer-events-none z-10"
+        style={{ opacity: 0, transition: 'opacity 0.2s ease-out', left: 0, top: 0 }}
+      >
+        <span
+          className="font-sans text-[9px] tracking-[0.28em] uppercase whitespace-nowrap"
+          style={{ color: song.cursorHintColor ?? `${song.coverAccent}80` }}
+        >
+          try scratching
+        </span>
+      </div>
+
       {/* Spinning vinyl */}
       <motion.div className="w-full h-full" style={{ rotate: rotation }}>
         <svg viewBox="0 0 400 400" className="w-full h-full" aria-hidden="true">

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback, memo } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, AnimatePresence } from 'framer-motion'
 import VinylDisc from './VinylDisc'
 import { songs } from '@/data/songs'
 import type { Song, RPM } from '@/types'
@@ -132,7 +132,7 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
           transform: `translateY(-50%) translateX(${vinylOnRight ? '42%' : '-42%'})`,
           zIndex: 0,
           borderRadius: '50%',
-          boxShadow: `0 0 70px 30px ${song.coverAccent}55, 0 0 140px 80px ${song.coverAccent}28, 0 0 220px 120px ${song.coverAccent}12`,
+          boxShadow: `0 0 50px 4px ${song.coverAccent}22, 0 0 110px 25px ${song.coverAccent}0c, 0 0 200px 60px ${song.coverAccent}04`,
           opacity: isPlaying ? 1 : 0,
           transition: 'opacity 0.9s ease-in-out',
           willChange: 'opacity',
@@ -260,26 +260,18 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
 
           <motion.button
             onClick={() => onOpenSleeve(song)}
-            className="self-start font-sans text-[11px] tracking-[0.25em] uppercase flex items-center gap-3 px-5 py-3 rounded-sm transition-all duration-300"
+            className="self-start font-sans text-[11px] tracking-[0.25em] uppercase flex items-center gap-3 px-5 py-3 rounded-sm"
             style={{
               color: song.coverAccent,
               border: `1px solid ${song.coverAccent}55`,
               background: `${song.coverAccent}10`,
-              boxShadow: `0 0 18px 2px ${song.coverAccent}18`,
             }}
             whileHover={{
-              scale: 1.04,
-              boxShadow: `0 0 28px 6px ${song.coverAccent}35`,
-              background: `${song.coverAccent}20`,
+              border: `1px solid ${song.coverAccent}bb`,
+              background: `${song.coverAccent}22`,
+              boxShadow: `0 0 24px 6px ${song.coverAccent}35`,
             }}
-            animate={{
-              boxShadow: [
-                `0 0 14px 2px ${song.coverAccent}15`,
-                `0 0 22px 5px ${song.coverAccent}30`,
-                `0 0 14px 2px ${song.coverAccent}15`,
-              ],
-            }}
-            transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+            transition={{ duration: 0.25 }}
           >
             My story with this song
             <span style={{ opacity: 0.75 }}>→</span>
@@ -308,7 +300,7 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
         >
           <motion.button
             onClick={handlePlayStop}
-            className="w-10 h-10 rounded-full flex items-center justify-center text-[12px] transition-colors"
+            className="w-12 h-12 rounded-full flex items-center justify-center text-[15px] transition-colors"
             style={{
               border: `1px solid ${song.coverAccent}50`,
               color: isPlaying ? song.coverAccent : 'rgba(255,255,255,0.35)',
@@ -324,7 +316,7 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
             <motion.button
               key={r}
               onClick={() => setRpm(r)}
-              className="w-10 h-10 rounded-full flex items-center justify-center font-sans text-[11px] transition-colors"
+              className="w-12 h-12 rounded-full flex items-center justify-center font-sans text-[13px] transition-colors"
               style={{
                 border: `1px solid ${song.coverAccent}50`,
                 color: rpm === r ? song.coverAccent : 'rgba(255,255,255,0.35)',
@@ -342,7 +334,7 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
           <div className="relative">
             <motion.button
               onClick={handleFavoritePart}
-              className="w-10 h-10 rounded-full flex items-center justify-center text-[13px] transition-colors"
+              className="w-12 h-12 rounded-full flex items-center justify-center text-[16px] transition-colors"
               style={{
                 border: `1px solid ${song.coverAccent}50`,
                 color: isFavorite && isPlaying ? song.coverAccent : 'rgba(255,255,255,0.35)',
@@ -370,6 +362,13 @@ export default function RecordShelf({ onOpenSleeve }: RecordShelfProps) {
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-100px' })
   const [activeSongId, setActiveSongId] = useState<number | null>(null)
+  const [showWarning, setShowWarning] = useState(false)
+  const warningTriggerRef = useRef<HTMLDivElement>(null)
+  const warningInView = useInView(warningTriggerRef, { once: true, margin: '-40% 0px -40% 0px' })
+
+  useEffect(() => {
+    if (warningInView) setShowWarning(true)
+  }, [warningInView])
 
   const handlePlay = useCallback((id: number | null) => setActiveSongId(id), [])
   const handleOpenSleeve = useCallback((song: Song) => onOpenSleeve(song), [onOpenSleeve])
@@ -378,7 +377,7 @@ export default function RecordShelf({ onOpenSleeve }: RecordShelfProps) {
     <div ref={ref} className="w-full">
       <div className="mb-10 px-8 md:px-16 lg:px-24">
         <motion.p
-          className="font-sans text-[11px] tracking-[0.35em] uppercase text-amber-muted mb-4"
+          className="font-sans text-[11px] tracking-[0.35em] uppercase text-amber-muted mb-1"
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -387,21 +386,21 @@ export default function RecordShelf({ onOpenSleeve }: RecordShelfProps) {
         </motion.p>
 
         <motion.h2
-          className="font-serif leading-[0.9] tracking-tight overflow-hidden"
+          className="font-serif tracking-tight"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4 }}
         >
           <motion.span
-            className="block text-[clamp(1.6rem,4vw,3.2rem)] text-cream/60"
+            className="inline text-[clamp(3.5rem,10vw,9rem)] text-cream/60"
             initial={{ y: 40, opacity: 0 }}
             animate={inView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           >
-            My
+            My{' '}
           </motion.span>
           <motion.span
-            className="block text-[clamp(3.5rem,10vw,9rem)] text-cream"
+            className="inline text-[clamp(3.5rem,10vw,9rem)] text-cream"
             initial={{ y: 60, opacity: 0 }}
             animate={inView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
@@ -421,16 +420,90 @@ export default function RecordShelf({ onOpenSleeve }: RecordShelfProps) {
 
       <div>
         {songs.map((song, i) => (
-          <SongRow
-            key={song.id}
-            song={song}
-            index={i}
-            isPlaying={activeSongId === song.id}
-            onPlay={handlePlay}
-            onOpenSleeve={handleOpenSleeve}
-          />
+          <div key={song.id}>
+            {/* Trigger midden in de Willing and Able row */}
+            {i === 1 && <div ref={warningTriggerRef} style={{ height: 1, marginTop: '43vh' }} />}
+            <SongRow
+              song={song}
+              index={i}
+              isPlaying={activeSongId === song.id}
+              onPlay={handlePlay}
+              onOpenSleeve={handleOpenSleeve}
+            />
+          </div>
         ))}
       </div>
+
+      {/* Warning popup */}
+      <AnimatePresence>
+        {showWarning && (
+          <>
+            <motion.div
+              className="fixed inset-0 z-50"
+              style={{ background: 'rgba(2,2,8,0.88)', backdropFilter: 'blur(10px)' }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            />
+            <motion.div
+              className="fixed inset-0 z-50 flex items-center justify-center px-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <motion.div
+                className="max-w-md w-full text-center"
+                style={{
+                  background: 'linear-gradient(160deg, #0e0c18 0%, #080610 100%)',
+                  border: '1px solid rgba(200,169,110,0.18)',
+                  padding: '3rem 2.5rem',
+                }}
+                initial={{ opacity: 0, y: 24, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 12, scale: 0.97 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-amber-muted mb-5">
+                  trigger warning
+                </p>
+
+                <p className="font-serif text-[clamp(1.3rem,2.5vw,1.6rem)] leading-[1.5] text-cream mb-2">
+                  Willing and Able
+                </p>
+                <p className="font-sans text-[11px] tracking-[0.2em] uppercase mb-6"
+                  style={{ color: 'rgba(200,169,110,0.45)' }}>
+                  Noah Kahan
+                </p>
+
+                <p className="font-serif text-[clamp(0.95rem,1.8vw,1.15rem)] leading-[1.75] italic mb-8"
+                  style={{ color: 'rgba(200,169,110,0.75)' }}>
+                  If you listen, read and feel this one —<br />
+                  crying is practically guaranteed.
+                </p>
+
+                <div className="w-8 h-px mx-auto mb-8" style={{ background: 'rgba(200,169,110,0.3)' }} />
+
+                <motion.button
+                  onClick={() => setShowWarning(false)}
+                  className="font-sans text-[11px] tracking-[0.3em] uppercase px-8 py-3 transition-all duration-300"
+                  style={{
+                    color: 'rgba(200,169,110,0.9)',
+                    border: '1px solid rgba(200,169,110,0.3)',
+                  }}
+                  whileHover={{
+                    background: 'rgba(200,169,110,0.08)',
+                    border: '1px solid rgba(200,169,110,0.6)',
+                  }}
+                >
+                  I&apos;m ready
+                </motion.button>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

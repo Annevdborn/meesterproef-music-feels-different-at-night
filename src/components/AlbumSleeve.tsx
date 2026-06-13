@@ -151,6 +151,23 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                           exit={{ opacity: 0, x: slideDir * -40 }}
                           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                         >
+                          {song.triggerWarning && (
+                            <div
+                              className="mt-6 px-4 py-3 rounded-sm"
+                              style={{
+                                background: `${song.coverAccent}12`,
+                                border: `1px solid ${song.coverAccent}40`,
+                              }}
+                            >
+                              <p className="font-sans text-[9px] tracking-[0.3em] uppercase mb-1.5" style={{ color: `${song.coverAccent}90` }}>
+                                eerlijke waarschuwing
+                              </p>
+                              <p className="font-serif text-[13px] italic leading-relaxed" style={{ color: `${song.coverAccent}cc` }}>
+                                {song.triggerWarning}
+                              </p>
+                            </div>
+                          )}
+
                           {song.artistMeaning && (
                             <div
                               className="mt-8 pt-6"

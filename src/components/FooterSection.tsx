@@ -5,6 +5,72 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 
 const SPOTIFY_URL = 'https://open.spotify.com/user/annexx2001'
 
+const STARS = [
+  { x: 7,  y: 5,  r: 1.4, o: 0.55, d: 2.8, delay: 0.0 },
+  { x: 18, y: 11, r: 0.8, o: 0.35, d: 3.5, delay: 0.7 },
+  { x: 29, y: 3,  r: 1.6, o: 0.65, d: 2.2, delay: 1.4 },
+  { x: 41, y: 8,  r: 1.0, o: 0.45, d: 4.1, delay: 0.3 },
+  { x: 53, y: 2,  r: 0.7, o: 0.30, d: 3.0, delay: 1.9 },
+  { x: 64, y: 13, r: 1.3, o: 0.50, d: 2.6, delay: 0.5 },
+  { x: 76, y: 4,  r: 0.9, o: 0.40, d: 3.8, delay: 1.1 },
+  { x: 87, y: 9,  r: 1.5, o: 0.60, d: 2.4, delay: 2.2 },
+  { x: 93, y: 17, r: 0.8, o: 0.35, d: 3.3, delay: 0.8 },
+  { x: 11, y: 22, r: 1.1, o: 0.45, d: 2.9, delay: 1.6 },
+  { x: 35, y: 18, r: 0.7, o: 0.28, d: 4.4, delay: 0.2 },
+  { x: 58, y: 7,  r: 1.2, o: 0.50, d: 2.7, delay: 2.8 },
+  { x: 72, y: 20, r: 0.9, o: 0.38, d: 3.6, delay: 0.9 },
+  { x: 84, y: 28, r: 1.0, o: 0.42, d: 2.3, delay: 1.7 },
+  { x: 4,  y: 31, r: 0.8, o: 0.32, d: 3.9, delay: 0.4 },
+  { x: 47, y: 24, r: 1.4, o: 0.55, d: 2.5, delay: 2.1 },
+  { x: 90, y: 35, r: 0.7, o: 0.30, d: 4.2, delay: 1.3 },
+  { x: 22, y: 38, r: 1.1, o: 0.40, d: 3.1, delay: 0.6 },
+  { x: 66, y: 32, r: 0.6, o: 0.25, d: 2.8, delay: 2.5 },
+  { x: 80, y: 42, r: 1.2, o: 0.48, d: 3.4, delay: 1.0 },
+  { x: 38, y: 45, r: 0.8, o: 0.33, d: 4.0, delay: 1.8 },
+  { x: 15, y: 48, r: 1.0, o: 0.38, d: 2.6, delay: 3.1 },
+  { x: 55, y: 40, r: 0.7, o: 0.28, d: 3.7, delay: 0.1 },
+  { x: 97, y: 22, r: 0.9, o: 0.36, d: 2.9, delay: 2.4 },
+  { x: 2,  y: 15, r: 0.6, o: 0.24, d: 4.3, delay: 1.5 },
+]
+
+// Shooting star moves from upper-right to lower-left at ~30° below horizontal.
+// rotate: -30 aligns the streak with its own direction of travel.
+// gradient: bright head (left/front) fades to transparent tail (right/behind).
+// Moves from upper-left to lower-right at ~30° below horizontal.
+// rotate: 30 aligns the streak with its travel direction.
+// gradient: bright head at the right (front/lower-right), tail fades left.
+function ShootingStar({ top, left, delay }: { top: string; left: string; delay: number }) {
+  return (
+    <motion.div
+      aria-hidden="true"
+      style={{
+        position: 'absolute',
+        top,
+        left,
+        width: 160,
+        height: 1.5,
+        background: 'linear-gradient(to left, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 20%, rgba(255,255,255,0.15) 60%, transparent 100%)',
+        borderRadius: 2,
+        rotate: 30,
+        pointerEvents: 'none',
+        zIndex: 0,
+      }}
+      animate={{
+        x: [0, 520],
+        y: [0, 300],
+        opacity: [0, 1, 1, 0],
+      }}
+      transition={{
+        duration: 0.7,
+        repeat: Infinity,
+        repeatDelay: delay,
+        ease: [0.3, 0, 0.85, 1],
+        times: [0, 0.05, 0.9, 1],
+      }}
+    />
+  )
+}
+
 function VinylIntoSleeve() {
   const vinylRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -20,9 +86,9 @@ function VinylIntoSleeve() {
   return (
     <div>
       {/* Vinyl animation */}
-      <div ref={vinylRef} className="w-full relative" style={{ paddingBottom: 'min(15vw, 150px)' }}>
+      <div ref={vinylRef} className="w-full relative" style={{ paddingBottom: 'min(18vw, 185px)' }}>
         <div className="flex justify-center" style={{ position: 'relative', zIndex: 1 }}>
-          <motion.div style={{ width: '90vw', height: '90vw', maxWidth: 900, maxHeight: 900, y: vinylY }}>
+          <motion.div style={{ width: '110vw', height: '110vw', maxWidth: 1200, maxHeight: 1200, y: vinylY }}>
             <svg
               viewBox="0 0 200 200"
               width="100%"
@@ -65,44 +131,107 @@ function VinylIntoSleeve() {
           </motion.div>
         </div>
 
-        {/* Sleeve overlay */}
+        {/* Sleeve opening — no hard border, fades in from the vinyl shadow */}
         <div
           style={{
             position: 'absolute',
-            top: 'min(45vw, 450px)',
+            top: 'min(35vw, 380px)',
             left: 0,
             right: 0,
             bottom: 0,
             zIndex: 2,
-            background: 'linear-gradient(180deg, #1e1608 0%, #141008 60%, #0a0804 100%)',
-            borderTop: '1px solid rgba(200,169,110,0.22)',
-            boxShadow: 'inset 0 12px 60px rgba(0,0,0,0.9)',
+            background: 'linear-gradient(180deg, #04050d 0%, #04050d 100%)',
           }}
         >
+          {/* soft shadow where vinyl enters */}
           <div style={{
-            position: 'absolute', top: 0, left: 0, right: 0, height: 80,
-            background: 'linear-gradient(to bottom, rgba(0,0,0,0.95), transparent)',
+            position: 'absolute', top: 0, left: 0, right: 0, height: 120,
+            background: 'linear-gradient(to bottom, rgba(0,0,4,0.98), transparent)',
           }} />
         </div>
       </div>
 
-      {/* Sleeve content — pulled up into the sleeve face; z-index 3 places it in front of the vinyl */}
+      {/* Sleeve face — night atmosphere with stars */}
       <div
         ref={contentRef}
         style={{
           position: 'relative',
           zIndex: 3,
-          marginTop: 'calc(-1 * min(40vw, 420px))',
-          background: 'linear-gradient(180deg, #1a1208 0%, #0f0b06 30%, #080603 100%)',
+          marginTop: 'calc(-1 * min(65vw, 700px))',
+          overflow: 'hidden',
+          // fades in seamlessly from the vinyl container above
+          background: 'linear-gradient(180deg, transparent 0%, rgba(4,5,13,0.85) 6%, #04050d 14%)',
           paddingTop: '3rem',
           paddingBottom: '5rem',
           paddingLeft: 'clamp(2rem, 8vw, 8rem)',
           paddingRight: 'clamp(2rem, 8vw, 8rem)',
         }}
       >
-        <div style={{ maxWidth: '64rem', margin: '0 auto' }}>
+        {/* CSS keyframes — no JS per frame */}
+        <style>{`
+          @keyframes footer-twinkle {
+            0%, 100% { opacity: var(--bright); }
+            50%      { opacity: var(--dim); }
+          }
+        `}</style>
 
-          {/* Thank you heading */}
+        {/* Twinkling stars — CSS animation, zero JS per frame */}
+        {STARS.map((s, i) => (
+          <div
+            key={i}
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              left: `${s.x}%`,
+              top: `${s.y}%`,
+              width: s.r * 2,
+              height: s.r * 2,
+              borderRadius: '50%',
+              background: 'white',
+              pointerEvents: 'none',
+              ['--bright' as string]: s.o,
+              ['--dim' as string]: s.o * 0.1,
+              animation: `footer-twinkle ${s.d}s ${s.delay}s infinite ease-in-out`,
+            }}
+          />
+        ))}
+
+        {/* Shooting stars — upper-left to lower-right */}
+        <ShootingStar top="5%"  left="8%"  delay={9} />
+        <ShootingStar top="15%" left="35%" delay={16} />
+
+        {/* Moonlight glow — soft ambient light in upper area */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: '-10%',
+            right: '10%',
+            width: 600,
+            height: 600,
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(200,215,255,0.055) 0%, rgba(180,200,255,0.02) 40%, transparent 70%)',
+            pointerEvents: 'none',
+          }}
+        />
+
+        {/* Warm amber hint bottom-left — like a record player in a dark room */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            bottom: '10%',
+            left: '-5%',
+            width: 500,
+            height: 300,
+            background: 'radial-gradient(ellipse, rgba(200,169,110,0.04) 0%, transparent 65%)',
+            pointerEvents: 'none',
+          }}
+        />
+
+        {/* Content */}
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '64rem', margin: '0 auto' }}>
+
           <motion.h2
             className="font-serif text-[clamp(1.4rem,3vw,2.6rem)] leading-[1.25] text-cream mb-6"
             initial={{ opacity: 0, y: 24 }}
@@ -131,13 +260,12 @@ function VinylIntoSleeve() {
             even in silence, even at a distance. I hope something of mine stayed with you.
           </motion.p>
 
-          {/* Question */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              borderLeft: '1px solid rgba(200,169,110,0.25)',
+              borderLeft: '1px solid rgba(200,169,110,0.2)',
               paddingLeft: '2rem',
               marginBottom: '2.5rem',
             }}
@@ -157,7 +285,6 @@ function VinylIntoSleeve() {
             </p>
           </motion.div>
 
-          {/* Spotify link */}
           <motion.a
             href={SPOTIFY_URL}
             target="_blank"
@@ -173,7 +300,6 @@ function VinylIntoSleeve() {
             Listen on Spotify
           </motion.a>
 
-          {/* Bottom sleeve details */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
@@ -181,7 +307,7 @@ function VinylIntoSleeve() {
             style={{
               marginTop: '5rem',
               paddingTop: '2rem',
-              borderTop: '1px solid rgba(200,169,110,0.1)',
+              borderTop: '1px solid rgba(255,255,255,0.06)',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
@@ -191,7 +317,7 @@ function VinylIntoSleeve() {
               fontFamily: 'Arial, sans-serif',
               fontSize: 11,
               letterSpacing: '0.15em',
-              color: 'rgba(200,169,110,0.28)',
+              color: 'rgba(255,255,255,0.2)',
               textTransform: 'uppercase',
             }}>
               Music Feels Different At Night
@@ -199,7 +325,7 @@ function VinylIntoSleeve() {
             <span style={{
               fontFamily: 'Georgia, serif',
               fontSize: 14,
-              color: 'rgba(200,169,110,0.35)',
+              color: 'rgba(200,169,110,0.4)',
               fontStyle: 'italic',
             }}>
               — Anne
@@ -208,7 +334,7 @@ function VinylIntoSleeve() {
               fontFamily: 'Georgia, serif',
               fontSize: 11,
               letterSpacing: '0.2em',
-              color: 'rgba(200,169,110,0.28)',
+              color: 'rgba(255,255,255,0.2)',
               textTransform: 'uppercase',
             }}>
               Side A
