@@ -137,19 +137,19 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
             <svg viewBox="0 0 200 200" width="100%" height="100%" aria-hidden="true">
               <defs>
                 <radialGradient id="vf-base" cx="35%" cy="30%" r="75%">
-                  <stop offset="0%"   stopColor="#0e1830" />
-                  <stop offset="50%"  stopColor="#080e22" />
-                  <stop offset="100%" stopColor="#030612" />
+                  <stop offset="0%"   stopColor="#0b1a38" />
+                  <stop offset="50%"  stopColor="#060d24" />
+                  <stop offset="100%" stopColor="#02070f" />
                 </radialGradient>
                 {/* Moon surface patch upper-left */}
                 <radialGradient id="vf-mare" cx="32%" cy="34%" r="34%">
-                  <stop offset="0%"   stopColor="rgba(20,32,64,0.65)" />
+                  <stop offset="0%"   stopColor="rgba(8,18,55,0.7)" />
                   <stop offset="100%" stopColor="transparent" />
                 </radialGradient>
-                {/* Moonlight glow — cool blue-white */}
+                {/* Moonlight glow — cold night blue */}
                 <radialGradient id="vf-moon" cx="28%" cy="24%" r="55%">
-                  <stop offset="0%"   stopColor="rgba(180,208,255,0.24)" />
-                  <stop offset="50%"  stopColor="rgba(140,175,240,0.08)" />
+                  <stop offset="0%"   stopColor="rgba(160,200,255,0.28)" />
+                  <stop offset="50%"  stopColor="rgba(120,170,245,0.09)" />
                   <stop offset="100%" stopColor="transparent" />
                 </radialGradient>
                 <radialGradient id="vf-edge" cx="50%" cy="50%" r="50%">
@@ -166,7 +166,7 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
               {Array.from({ length: 20 }, (_, i) => (
                 <circle key={i} cx="100" cy="100" r={30 + i * 3.3}
                   fill="none"
-                  stroke={i % 2 === 0 ? 'rgba(150,195,255,0.2)' : 'rgba(90,145,220,0.09)'}
+                  stroke={i % 2 === 0 ? 'rgba(120,180,255,0.24)' : 'rgba(70,130,220,0.1)'}
                   strokeWidth={i % 2 === 0 ? 0.75 : 0.38}
                 />
               ))}
@@ -176,12 +176,12 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
               <circle cx="100" cy="100" r="99" fill="url(#vf-moon)" />
 
               {/* Craters — minimal, 2 elements each */}
-              <circle cx="62"  cy="57"  r="8"   fill="rgba(14,22,52,0.55)" />
-              <circle cx="62"  cy="57"  r="8"   fill="none" stroke="rgba(160,195,245,0.3)" strokeWidth="0.9" />
-              <circle cx="138" cy="72"  r="5.5" fill="rgba(12,20,50,0.5)"  />
-              <circle cx="138" cy="72"  r="5.5" fill="none" stroke="rgba(150,188,240,0.25)" strokeWidth="0.7" />
-              <circle cx="76"  cy="142" r="10"  fill="rgba(14,24,54,0.45)" />
-              <circle cx="76"  cy="142" r="10"  fill="none" stroke="rgba(155,192,242,0.28)" strokeWidth="0.85" />
+              <circle cx="62"  cy="57"  r="8"   fill="rgba(4,10,35,0.6)" />
+              <circle cx="62"  cy="57"  r="8"   fill="none" stroke="rgba(130,185,255,0.32)" strokeWidth="0.9" />
+              <circle cx="138" cy="72"  r="5.5" fill="rgba(4,8,32,0.55)" />
+              <circle cx="138" cy="72"  r="5.5" fill="none" stroke="rgba(120,178,252,0.27)" strokeWidth="0.7" />
+              <circle cx="76"  cy="142" r="10"  fill="rgba(4,10,36,0.5)" />
+              <circle cx="76"  cy="142" r="10"  fill="none" stroke="rgba(125,182,253,0.3)" strokeWidth="0.85" />
 
               {/* Stars — tiny dots scattered across the surface */}
               <circle cx="45"  cy="34"  r="0.9" fill="rgba(225,230,255,0.75)" />
@@ -196,9 +196,9 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
               <circle cx="100" cy="100" r="99" fill="url(#vf-edge)" />
 
               {/* Center label */}
-              <circle cx="100" cy="100" r="22" fill="#050810" />
-              <circle cx="100" cy="100" r="22" fill="none" stroke="rgba(130,175,240,0.25)" strokeWidth="0.7" />
-              <circle cx="100" cy="100" r="2.8" fill="#0a1020" />
+              <circle cx="100" cy="100" r="22" fill="#030710" />
+              <circle cx="100" cy="100" r="22" fill="none" stroke="rgba(100,165,245,0.28)" strokeWidth="0.7" />
+              <circle cx="100" cy="100" r="2.8" fill="#060e1e" />
             </svg>
           </motion.div>
         </div>
