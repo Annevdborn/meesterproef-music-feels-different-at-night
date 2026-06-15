@@ -126,7 +126,7 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
     offset: ['start end', 'end end'],
   })
 
-  const vinylY = useTransform(scrollYProgress, [0, 1], ['0%', '52%'])
+  const vinylY = useTransform(scrollYProgress, [0, 1], ['0%', '65%'])
 
   return (
     <div>
@@ -207,7 +207,7 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
         <div
           style={{
             position: 'absolute',
-            top: 'min(52vw, 560px)',
+            top: 'min(68vw, 730px)',
             left: 0,
             right: 0,
             bottom: 0,
@@ -229,7 +229,7 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
         style={{
           position: 'relative',
           zIndex: 3,
-          marginTop: 'calc(-1 * min(78vw, 840px))',
+          marginTop: 'calc(-1 * min(62vw, 670px))',
           overflow: 'hidden',
           // fades in seamlessly from the vinyl container above
           background: 'linear-gradient(180deg, transparent 0%, rgba(4,5,13,0.85) 6%, #04050d 14%)',
