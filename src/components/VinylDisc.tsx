@@ -71,20 +71,27 @@ export default function VinylDisc({ song, isPlaying, isSpinning, rpm, audioRef }
     scratchGainRef.current = gain
   }
 
-  const setScratchIntensity = (velocity: number) => {
+  const setScratchIntensity = (delta: number, dt: number) => {
     const ctx = audioCtxRef.current
     const gain = scratchGainRef.current
     const source = scratchSourceRef.current
     if (!ctx || !gain || !source) return
-    gain.gain.setTargetAtTime(Math.min(velocity * 0.06, 1), ctx.currentTime, 0.015)
-    source.playbackRate.setTargetAtTime(Math.min(0.5 + velocity * 0.05, 3), ctx.currentTime, 0.015)
+    const velocity = Math.abs(delta) / Math.max(dt, 1) // deg/ms
+    // Gain: minimum audible at any movement, louder when fast
+    const targetGain = velocity < 0.05 ? 0 : Math.min(0.18 + velocity * 0.1, 1.0)
+    gain.gain.setTargetAtTime(targetGain, ctx.currentTime, 0.006)
+    // Playback rate: forward = higher pitch, backward = lower pitch
+    const rate = delta >= 0
+      ? Math.min(1.0 + velocity * 0.3, 4.0)   // forward: 1x → 4x
+      : Math.max(0.1, 0.85 - velocity * 0.07)  // backward: 0.85x → 0.1x
+    source.playbackRate.setTargetAtTime(rate, ctx.currentTime, 0.005)
   }
 
   const fadeScratchOut = () => {
     const ctx = audioCtxRef.current
     const gain = scratchGainRef.current
     if (!ctx || !gain) return
-    gain.gain.setTargetAtTime(0, ctx.currentTime, 0.07)
+    gain.gain.setTargetAtTime(0, ctx.currentTime, 0.04)
   }
 
   useEffect(() => {
@@ -147,10 +154,9 @@ export default function VinylDisc({ song, isPlaying, isSpinning, rpm, audioRef }
       if (delta < -180) delta += 360
       const now = performance.now()
       const dt = now - lastScratchTime.current
-      const velocity = dt > 0 ? Math.abs(delta) / dt : 0
-      setScratchIntensity(velocity)
+      setScratchIntensity(delta, dt)
       if (stopFadeRef.current) clearTimeout(stopFadeRef.current)
-      stopFadeRef.current = setTimeout(fadeScratchOut, 80)
+      stopFadeRef.current = setTimeout(fadeScratchOut, 60)
       rotation.set(rotation.get() + delta)
       lastAngle.current = angle
       lastScratchTime.current = now
