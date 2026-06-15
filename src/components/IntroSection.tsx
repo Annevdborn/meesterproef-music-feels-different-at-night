@@ -34,7 +34,7 @@ export default function IntroSection() {
 
         {/* Body */}
         <motion.p
-          className="font-sans text-[15px] md:text-[16px] leading-[1.9] text-cream-muted max-w-prose md:pl-4"
+          className="font-grotesk text-[15px] md:text-[16px] leading-[1.9] text-cream-muted max-w-prose md:pl-4"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}

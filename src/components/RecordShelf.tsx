@@ -255,7 +255,7 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
           }`}
         >
           <p
-            className="font-sans font-semibold text-[9px] tracking-[0.35em] uppercase mb-3"
+            className="font-grotesk font-semibold text-[9px] tracking-[0.35em] uppercase mb-3"
             style={{ color: `${song.coverAccent}90` }}
           >
             for me this was {song.emotion} · {song.year}
@@ -265,11 +265,11 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
             {song.title}
           </h3>
 
-          <p className="font-sans text-[12px] text-cream-dim mb-5">{song.artist}</p>
+          <p className="font-grotesk text-[12px] text-cream-dim mb-5">{song.artist}</p>
 
           <div className="h-px w-8 mb-5" style={{ background: `${song.coverAccent}50` }} />
 
-          <p className="font-sans font-semibold text-[9px] tracking-[0.25em] uppercase mb-3" style={{ color: `${song.coverAccent}70` }}>
+          <p className="font-grotesk font-semibold text-[9px] tracking-[0.25em] uppercase mb-3" style={{ color: `${song.coverAccent}70` }}>
             from my personal note
           </p>
 
@@ -288,7 +288,7 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
           <div className="self-start relative">
             <motion.button
               onClick={() => { onOpenSleeve(song); setShowStoryHint(false) }}
-              className="font-sans text-[11px] tracking-[0.25em] uppercase flex items-center gap-3 px-5 py-3 rounded-sm"
+              className="font-grotesk text-[11px] tracking-[0.25em] uppercase flex items-center gap-3 px-5 py-3 rounded-sm"
               style={{
                 color: song.coverAccent,
                 border: `1px solid ${song.coverAccent}55`,
@@ -346,7 +346,7 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
             <motion.button
               key={r}
               onClick={() => setRpm(r)}
-              className="w-12 h-12 rounded-full flex items-center justify-center font-sans text-[13px] transition-colors"
+              className="w-12 h-12 rounded-full flex items-center justify-center font-grotesk text-[13px] transition-colors"
               style={{
                 border: `1px solid ${song.coverAccent}50`,
                 color: rpm === r ? song.coverAccent : 'rgba(255,255,255,0.35)',
@@ -376,7 +376,7 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
               ♥
             </motion.button>
             <span
-              className="absolute top-full mt-1 left-1/2 -translate-x-1/2 font-sans text-[9px] tracking-[0.2em] uppercase whitespace-nowrap"
+              className="absolute top-full mt-1 left-1/2 -translate-x-1/2 font-grotesk text-[9px] tracking-[0.2em] uppercase whitespace-nowrap"
               style={{ color: `${song.coverAccent}70` }}
             >
               my part
@@ -407,7 +407,7 @@ export default function RecordShelf({ onOpenSleeve }: RecordShelfProps) {
     <div ref={ref} className="w-full">
       <div className="mb-10 px-8 md:px-16 lg:px-24">
         <motion.p
-          className="font-sans text-[11px] tracking-[0.35em] uppercase text-amber-muted mb-1"
+          className="font-grotesk text-[11px] tracking-[0.35em] uppercase text-amber-muted mb-1"
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -495,14 +495,14 @@ export default function RecordShelf({ onOpenSleeve }: RecordShelfProps) {
                 exit={{ opacity: 0, y: 12, scale: 0.97 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
-                <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-amber-muted mb-5">
+                <p className="font-grotesk text-[10px] tracking-[0.35em] uppercase text-amber-muted mb-5">
                   trigger warning
                 </p>
 
                 <p className="font-serif text-[clamp(1.3rem,2.5vw,1.6rem)] leading-[1.5] text-cream mb-2">
                   Willing and Able
                 </p>
-                <p className="font-sans text-[11px] tracking-[0.2em] uppercase mb-6"
+                <p className="font-grotesk text-[11px] tracking-[0.2em] uppercase mb-6"
                   style={{ color: 'rgba(200,169,110,0.45)' }}>
                   Noah Kahan
                 </p>
@@ -517,7 +517,7 @@ export default function RecordShelf({ onOpenSleeve }: RecordShelfProps) {
 
                 <motion.button
                   onClick={() => setShowWarning(false)}
-                  className="font-sans text-[11px] tracking-[0.3em] uppercase px-8 py-3 transition-all duration-300"
+                  className="font-grotesk text-[11px] tracking-[0.3em] uppercase px-8 py-3 transition-all duration-300"
                   style={{
                     color: 'rgba(200,169,110,0.9)',
                     border: '1px solid rgba(200,169,110,0.3)',

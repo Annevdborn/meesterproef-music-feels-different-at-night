@@ -54,7 +54,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
               {/* Close button */}
               <button
                 onClick={onClose}
-                className="absolute -top-10 right-0 font-sans text-[10px] tracking-[0.3em] uppercase text-cream-dim hover:text-cream transition-colors duration-300 z-10"
+                className="absolute -top-10 right-0 font-grotesk text-[10px] tracking-[0.3em] uppercase text-cream-dim hover:text-cream transition-colors duration-300 z-10"
                 aria-label="Close"
               >
                 Close ✕
@@ -93,7 +93,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                       transition={{ duration: 0.6, delay: 0.5 }}
                     >
                       <p
-                        className="font-sans text-[9px] tracking-[0.35em] uppercase mb-4"
+                        className="font-grotesk text-[9px] tracking-[0.35em] uppercase mb-4"
                         style={{ color: `${song.coverAccent}90` }}
                       >
                         for me this is {song.emotion} · {song.year}
@@ -101,7 +101,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                       <h3 className="font-serif text-[clamp(1.2rem,2.5vw,1.8rem)] text-cream leading-tight mb-1">
                         {song.title}
                       </h3>
-                      <p className="font-sans text-[12px] text-cream-dim mb-6">{song.artist}</p>
+                      <p className="font-grotesk text-[12px] text-cream-dim mb-6">{song.artist}</p>
                       <div
                         className="h-px w-10 mb-6"
                         style={{ background: `${song.coverAccent}50` }}
@@ -117,7 +117,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                     >
                       <button
                         onClick={() => { setSlideDir(-1); setPage(0) }}
-                        className="font-sans text-[9px] tracking-[0.25em] uppercase pb-1 transition-colors duration-300"
+                        className="font-grotesk text-[9px] tracking-[0.25em] uppercase pb-1 transition-colors duration-300"
                         style={{
                           color: page === 0 ? song.coverAccent : 'rgba(255,255,255,0.3)',
                           borderBottom: `1px solid ${page === 0 ? song.coverAccent : 'transparent'}`,
@@ -127,7 +127,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                       </button>
                       <button
                         onClick={() => { setSlideDir(1); setPage(1) }}
-                        className="font-sans text-[9px] tracking-[0.25em] uppercase pb-1 transition-colors duration-300"
+                        className="font-grotesk text-[9px] tracking-[0.25em] uppercase pb-1 transition-colors duration-300"
                         style={{
                           color: page === 1 ? song.coverAccent : 'rgba(255,255,255,0.3)',
                           borderBottom: `1px solid ${page === 1 ? song.coverAccent : 'transparent'}`,
@@ -157,10 +157,10 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                               className="mt-8 pt-6"
                               style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
                             >
-                              <p className="font-sans text-[9px] tracking-[0.3em] uppercase mb-4" style={{ color: `${song.coverAccent}70` }}>
+                              <p className="font-grotesk text-[9px] tracking-[0.3em] uppercase mb-4" style={{ color: `${song.coverAccent}70` }}>
                                 What this song is about
                               </p>
-                              <p className="font-sans text-[13px] md:text-[14px] leading-[1.85] text-cream-muted">
+                              <p className="font-grotesk text-[13px] md:text-[14px] leading-[1.85] text-cream-muted">
                                 {song.artistMeaning}
                               </p>
                             </div>
@@ -171,7 +171,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                               className="mt-8 pt-6"
                               style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
                             >
-                              <p className="font-sans text-[9px] tracking-[0.3em] uppercase mb-5" style={{ color: `${song.coverAccent}70` }}>
+                              <p className="font-grotesk text-[9px] tracking-[0.3em] uppercase mb-5" style={{ color: `${song.coverAccent}70` }}>
                                 My personal note
                               </p>
                               <div className="space-y-4">
@@ -193,7 +193,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                                   }
                                   const parts = para.split(/(\*\*[^*]+\*\*)/)
                                   return (
-                                    <p key={i} className="font-sans text-[13px] md:text-[14px] leading-[1.85] text-cream-muted">
+                                    <p key={i} className="font-grotesk text-[13px] md:text-[14px] leading-[1.85] text-cream-muted">
                                       {parts.map((part, k) =>
                                         part.startsWith('**') && part.endsWith('**')
                                           ? <strong key={k} className="font-semibold text-cream">{part.slice(2, -2)}</strong>
@@ -248,7 +248,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                                   {isHeader ? (
                                     <>
                                       <p
-                                        className="font-sans text-[8px] tracking-[0.35em] uppercase mb-2"
+                                        className="font-grotesk text-[8px] tracking-[0.35em] uppercase mb-2"
                                         style={{ color: `${song.coverAccent}70` }}
                                       >
                                         {lines[0]}
@@ -273,7 +273,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                           >
                             <button
                               onClick={goPrev}
-                              className="font-sans text-[9px] tracking-[0.25em] uppercase text-cream-dim/50 hover:text-cream-dim transition-colors flex items-center gap-2"
+                              className="font-grotesk text-[9px] tracking-[0.25em] uppercase text-cream-dim/50 hover:text-cream-dim transition-colors flex items-center gap-2"
                             >
                               <span style={{ color: song.coverAccent }}>←</span> Story
                             </button>

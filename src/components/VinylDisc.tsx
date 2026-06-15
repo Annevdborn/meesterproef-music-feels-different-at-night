@@ -206,7 +206,7 @@ export default function VinylDisc({ song, isPlaying, isSpinning, rpm, audioRef }
         style={{ opacity: 0, transition: 'opacity 0.2s ease-out', left: 0, top: 0 }}
       >
         <span
-          className="font-sans text-[9px] tracking-[0.28em] uppercase whitespace-nowrap"
+          className="font-grotesk text-[9px] tracking-[0.28em] uppercase whitespace-nowrap"
           style={{ color: song.cursorHintColor ?? `${song.coverAccent}80` }}
         >
           try scratching

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, DM_Sans } from 'next/font/google'
+import { Playfair_Display, DM_Sans, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import CustomCursor from '@/components/CustomCursor'
 import GlobalStarField from '@/components/GlobalStarField'
@@ -16,6 +16,12 @@ const dmSans = DM_Sans({
   display: 'swap',
 })
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
   title: 'Music Feels Different At Night',
   description: 'A personal, emotional experience built around five songs that each represent a memory, feeling or moment.',
@@ -27,7 +33,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="nl" className={`${playfair.variable} ${dmSans.variable}`}>
+    <html lang="nl" className={`${playfair.variable} ${dmSans.variable} ${spaceGrotesk.variable}`}>
       <body>
         <GlobalStarField />
         <CustomCursor />

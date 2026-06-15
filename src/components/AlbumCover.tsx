@@ -69,7 +69,7 @@ export default function AlbumCover({ song, className = '', fill = false }: Album
           {/* Text overlay */}
           <div className="absolute inset-0 flex flex-col justify-end p-4">
             <span
-              className="block text-[9px] tracking-[0.25em] uppercase mb-1 font-sans"
+              className="block text-[9px] tracking-[0.25em] uppercase mb-1 font-grotesk"
               style={{ color: `${song.coverAccent}90` }}
             >
               {song.emotion}

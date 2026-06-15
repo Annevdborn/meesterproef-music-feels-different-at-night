@@ -68,7 +68,7 @@ export default function VinylRecord({ song, isActive, isDimmed, onSelect }: Viny
       {/* Label */}
       <div className="text-center space-y-1">
         <p
-          className="text-[9px] tracking-[0.25em] uppercase font-sans"
+          className="text-[9px] tracking-[0.25em] uppercase font-grotesk"
           style={{ color: `${song.coverAccent}90` }}
         >
           {song.emotion}

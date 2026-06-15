@@ -26,6 +26,7 @@ const config: Config = {
       fontFamily: {
         serif: ['var(--font-playfair)', 'Georgia', 'serif'],
         sans: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        grotesk: ['var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
       },
       animation: {
         grain: 'grain 0.4s steps(1) infinite',

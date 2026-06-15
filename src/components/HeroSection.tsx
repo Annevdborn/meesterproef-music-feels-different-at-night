@@ -115,7 +115,7 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-[90rem] mx-auto w-full">
         {/* Always-visible context line */}
         <motion.p
-          className="text-[11px] tracking-[0.3em] uppercase text-amber-muted mb-8 font-sans"
+          className="text-[11px] tracking-[0.3em] uppercase text-amber-muted mb-8 font-grotesk"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 1 }}
@@ -166,7 +166,7 @@ export default function HeroSection() {
           animate="visible"
         >
           <div className="h-px w-12 bg-amber-glow/40 mb-6" />
-          <p className="font-sans text-[13px] leading-[1.8] tracking-wide text-cream-muted">
+          <p className="font-grotesk text-[13px] leading-[1.8] tracking-wide text-cream-muted">
             My 5 songs • my five feelings
             <br />My personal collection from the hours after midnight.
           </p>
@@ -181,7 +181,7 @@ export default function HeroSection() {
         animate="visible"
         aria-hidden="true"
       >
-        <p className="font-sans text-[11px] tracking-[0.25em] uppercase text-center leading-relaxed"
+        <p className="font-grotesk text-[11px] tracking-[0.25em] uppercase text-center leading-relaxed"
           style={{ color: 'rgba(200,169,110,0.7)' }}>
           scroll for my<br />personal collection
         </p>

@@ -67,7 +67,7 @@ export default function Turntable({ song, onOpenSleeve, onClose }: TurntableProp
       {/* Back button */}
       <button
         onClick={handleClose}
-        className="flex items-center gap-2 mb-8 font-sans text-[11px] tracking-[0.25em] uppercase text-cream-dim hover:text-amber-glow transition-colors duration-300 group"
+        className="flex items-center gap-2 mb-8 font-grotesk text-[11px] tracking-[0.25em] uppercase text-cream-dim hover:text-amber-glow transition-colors duration-300 group"
         aria-label="Return to record collection"
       >
         <motion.span
@@ -136,13 +136,13 @@ export default function Turntable({ song, onOpenSleeve, onClose }: TurntableProp
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="font-sans text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: `${song.coverAccent}aa` }}>
+              <p className="font-grotesk text-[10px] tracking-[0.3em] uppercase mb-3" style={{ color: `${song.coverAccent}aa` }}>
                 {song.emotion} — {song.year}
               </p>
               <h2 className="font-serif text-[clamp(1.5rem,3vw,2.5rem)] leading-[1.1] text-cream mb-2">
                 {song.title}
               </h2>
-              <p className="font-sans text-[13px] text-cream-muted">{song.artist}</p>
+              <p className="font-grotesk text-[13px] text-cream-muted">{song.artist}</p>
             </motion.div>
           </AnimatePresence>
 
@@ -195,7 +195,7 @@ export default function Turntable({ song, onOpenSleeve, onClose }: TurntableProp
                     setRpm(speed)
                     setPlaybackRate(speed === 45 ? 1.8 : 1)
                   }}
-                  className={`px-4 py-2 font-sans text-[11px] tracking-widest transition-all duration-300 ${
+                  className={`px-4 py-2 font-grotesk text-[11px] tracking-widest transition-all duration-300 ${
                     rpm === speed ? 'text-night-900' : 'text-cream-dim hover:text-cream-muted'
                   }`}
                   style={{ background: rpm === speed ? song.coverAccent : 'transparent' }}
@@ -230,7 +230,7 @@ export default function Turntable({ song, onOpenSleeve, onClose }: TurntableProp
                 ))}
               </motion.div>
             )}
-            <span className="font-sans text-[10px] text-cream-dim">
+            <span className="font-grotesk text-[10px] text-cream-dim">
               {showSpinner ? 'Placing needle…' : isPlaying ? 'Now playing' : 'Paused'}
             </span>
           </div>
@@ -247,7 +247,7 @@ export default function Turntable({ song, onOpenSleeve, onClose }: TurntableProp
               className="h-px flex-1 w-8 group-hover:w-12 transition-all duration-300"
               style={{ background: `${song.coverAccent}50` }}
             />
-            <span className="font-sans text-[11px] tracking-[0.25em] uppercase" style={{ color: `${song.coverAccent}cc` }}>
+            <span className="font-grotesk text-[11px] tracking-[0.25em] uppercase" style={{ color: `${song.coverAccent}cc` }}>
               Open the sleeve
             </span>
             <span style={{ color: `${song.coverAccent}80` }}>→</span>

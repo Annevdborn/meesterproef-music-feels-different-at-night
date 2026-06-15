@@ -302,7 +302,7 @@ function VinylIntoSleeve() {
           />
 
           <motion.p
-            className="font-sans text-[15px] leading-[1.9] text-cream-muted mb-12"
+            className="font-grotesk text-[15px] leading-[1.9] text-cream-muted mb-12"
             initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -328,7 +328,7 @@ function VinylIntoSleeve() {
             <p className="font-serif text-[clamp(1.1rem,2vw,1.5rem)] leading-[1.5] text-cream mb-5">
               &ldquo;Which song carries something you&apos;ve never quite been able to explain?&rdquo;
             </p>
-            <p className="font-sans text-[14px] leading-[1.85] text-cream-dim">
+            <p className="font-grotesk text-[14px] leading-[1.85] text-cream-dim">
               Not your favourite. Not the one you&apos;d put on a playlist for someone else.
               The one that belongs to a specific night, a specific feeling. The one
               that always gets through, no matter what time it is.
@@ -341,7 +341,7 @@ function VinylIntoSleeve() {
             href={SPOTIFY_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 font-sans text-[13px] tracking-widest uppercase text-amber-glow border border-amber-glow/30 px-6 py-3 hover:bg-amber-glow/5 hover:border-amber-glow/60 transition-all duration-300"
+            className="inline-flex items-center gap-3 font-grotesk text-[13px] tracking-widest uppercase text-amber-glow border border-amber-glow/30 px-6 py-3 hover:bg-amber-glow/5 hover:border-amber-glow/60 transition-all duration-300"
             initial={{ opacity: 0, y: 12 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}

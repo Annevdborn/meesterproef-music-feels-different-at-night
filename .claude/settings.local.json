@@ -18,7 +18,10 @@
       "Bash(cp \"/Users/annevandenborn/Desktop/MeesterProef - Music Feels Different At Night/Noah Kahan - Willing and Able \\(Official Lyric Video\\).mp4\" \"/Users/annevandenborn/Desktop/MeesterProef - Music Feels Different At Night/public/videos/willing-and-able.mp4\")",
       "Skill(run)",
       "Skill(run:*)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(CLAUDE_CODE_TMPDIR=/tmp grep -r \"Read More\" \"/Users/annevandenborn/Desktop/MeesterProef - Music Feels Different At Night/src\" --include=\"*.tsx\" -n)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
