@@ -271,18 +271,22 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
             50%      { opacity: var(--dim); }
           }
           @keyframes sleep-breathe {
-            0%, 100% { box-shadow: 0 0 14px rgba(200,169,110,0.12), 0 0 0 1px rgba(200,169,110,0.15); }
-            50%       { box-shadow: 0 0 28px rgba(200,169,110,0.28), 0 0 0 1px rgba(200,169,110,0.35); }
+            0%, 100% { opacity: 0.5; }
+            50%       { opacity: 1; }
           }
-          .sleep-btn {
-            animation: sleep-breathe 3s ease-in-out infinite;
-            border-radius: 4px;
+          .sleep-btn { animation: sleep-breathe 3.5s ease-in-out infinite; }
+          .sleep-btn:hover { animation: none; opacity: 1; }
+          .sleep-btn .sleep-text {
+            color: rgba(255,255,255,0.85);
+            text-shadow: 0 0 16px rgba(200,169,110,0.5);
+            transition: text-shadow 0.5s;
           }
-          .sleep-btn .sleep-text { color: rgba(255,255,255,0.65); transition: color 0.5s; }
-          .sleep-btn .sleep-moon { color: rgba(200,169,110,0.6); transition: color 0.5s, transform 0.5s; }
-          .sleep-btn:hover { animation: none; box-shadow: 0 0 36px rgba(200,169,110,0.4), 0 0 0 1px rgba(200,169,110,0.55); }
-          .sleep-btn:hover .sleep-text { color: rgba(255,255,255,0.95); }
-          .sleep-btn:hover .sleep-moon { color: rgba(200,169,110,0.9); transform: translateY(-3px); }
+          .sleep-btn .sleep-moon {
+            color: rgba(200,169,110,0.7);
+            transition: color 0.5s, transform 0.5s;
+          }
+          .sleep-btn:hover .sleep-text { text-shadow: 0 0 24px rgba(200,169,110,0.85); }
+          .sleep-btn:hover .sleep-moon { color: rgba(200,169,110,1); transform: translateY(-3px); }
         `}</style>
 
         {/* Twinkling stars — CSS animation, zero JS per frame */}
@@ -461,7 +465,7 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
             <button
               onClick={onSleep}
               className="sleep-btn"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '1rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', margin: '0 auto' }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', margin: '0 auto' }}
               aria-label="Sluit je ogen en ga terug naar het begin"
             >
               <span className="sleep-text" style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: 'clamp(0.8rem, 1.3vw, 1rem)', letterSpacing: '0.04em' }}>
