@@ -232,7 +232,7 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
         <div
           style={{
             position: 'absolute',
-            top: 'min(35vw, 380px)',
+            top: 'min(52vw, 560px)',
             left: 0,
             right: 0,
             bottom: 0,
@@ -254,7 +254,7 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
         style={{
           position: 'relative',
           zIndex: 3,
-          marginTop: 'calc(-1 * min(65vw, 700px))',
+          marginTop: 'calc(-1 * min(78vw, 840px))',
           overflow: 'hidden',
           // fades in seamlessly from the vinyl container above
           background: 'linear-gradient(180deg, transparent 0%, rgba(4,5,13,0.85) 6%, #04050d 14%)',
@@ -517,7 +517,7 @@ export default function FooterSection() {
 
   return (
     <>
-      <footer className="relative overflow-hidden">
+      <footer className="relative overflow-hidden" style={{ paddingTop: '8rem' }}>
         <div style={{ width: '100vw', position: 'relative', left: '50%', transform: 'translateX(-50%)' }}>
           <VinylIntoSleeve onSleep={handleSleep} />
         </div>
