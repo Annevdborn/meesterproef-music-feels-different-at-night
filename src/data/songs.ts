@@ -296,37 +296,22 @@ Now, whenever I listen to this track, I think about that feeling, being pulled o
 And I hope that one day I will hear it live at a festival.
 
 Not through headphones. Not alone in my room. But in the middle of a crowd, feeling it properly, louder and heavier than I have ever experienced it before.`,
-    lyrics: `Verse 1
-Placeholder lyric line one
-Placeholder lyric line two
-Placeholder lyric line three
-Placeholder lyric line four
+    lyrics: `ESPAÑOL
+Se trajo su amor.
+Yo lo pruebo todo.
+Lo quise probar.
+Lo probé y picó.
+Repetí, repitió (x2)
+Se acabó el amor
 
-Chorus
-Placeholder chorus line one
-Placeholder chorus line two
-Placeholder chorus line three
-
-Verse 2
-Placeholder lyric line five
-Placeholder lyric line six
-Placeholder lyric line seven
-Placeholder lyric line eight
-
-Chorus
-Placeholder chorus line one
-Placeholder chorus line two
-Placeholder chorus line three
-
-Bridge
-Placeholder bridge line one
-Placeholder bridge line two
-
-Chorus
-Placeholder chorus line one
-Placeholder chorus line two
-Placeholder chorus line three`,
-    favoriteStart: 45,
+ENGLISH
+He/she brought his/her love
+I try all of it
+I wanted to try it
+I tried it and it stung
+I repeated, he/she repeated
+The love ran out`,
+    favoriteStart: 70,
   },
   {
     id: 4,
@@ -340,7 +325,33 @@ Placeholder chorus line three`,
     audioSrc: '/audio/for-keeps.mp3',
     story: `"There's something about a song that names the thing you could never say out loud.\nThe feeling of being the only one who's still trying.\nOf loving someone who has already quietly let go."`,
     artistMeaning: `For Keeps is Emyrson Flora's portrait of unequal love — being the one who is still fully invested while the other person has already quietly moved on. She wrote it about that specific, painful moment when you realise you are the only one still playing for keeps. The voicemail at the start sets the tone: a call that goes unanswered, a connection that has already slipped away.`,
-    linerNote: `[Your personal liner note about For Keeps will go here. What does this song mean to you? When do you listen to it? What memory or feeling does it bring up?]`,
+    linerNote: `For Keeps came into my life at a strange time. If you only listened to the song, you would probably assume it belongs on a heartbreak playlist. And honestly, it does. The funny thing is that I only discovered it after my heartbreak had already happened. Sometimes I wonder how much more it would have meant if I had found it while I was going through it.
+
+In May 2024, I went through the biggest heartbreak of my life. It was the kind you never see coming. The kind that makes eating feel impossible. The kind that has you crying for weeks because you simply cannot believe your reality has changed so suddenly.
+
+It took me well over a year before I reached a point where I no longer cried about it all the time. Healing was slow, and some days felt like I was taking two steps backwards instead of forwards. By the middle of 2025, I finally started feeling like myself again.
+
+That was when I found this song.
+
+I was out for a walk on a warm summer evening. It was late, already dark outside, and I had my headphones on. The moment this song started playing, I stopped thinking about where I was walking and started thinking about everything I had been through.
+
+It described exactly how I had felt after the relationship ended.
+
+I gave everything I had to make it work. I put him on a pedestal. I kept trying, hoping, believing that if I just loved a little harder, it would somehow be enough. But nothing came back.
+
+I remember listening to the song over and over again that night, reading every lyric while it played. It almost hurt to hear because it felt like someone had taken the thoughts I never managed to put into words and turned them into a song.
+
+Now, two years after the breakup, the song feels different. The sadness is still there somewhere, but it no longer defines the way I hear it.
+
+Instead, it reminds me of the kind of person I am. Someone who loves completely. Someone who does not give up easily. Someone who plays for keeps.
+
+My favourite part of the song is one section that I always end up singing as loudly as I can when I'm alone. Sometimes I imagine saying those words directly to him. Not because I still need him to hear them, but because they perfectly capture everything I never got the chance to say.
+
+More than anything, this song reminds me of how much I've grown. A year ago, I remember thinking that I would never become the person I used to be again.
+
+And I was right. I never became the old version of myself. I became someone new. Someone stronger. Someone happier.
+
+And although I would never choose to go through that heartbreak again, I can honestly say that it shaped me into a better person than I was before.`,
     lyrics: `Intro
 *beep*
 *beep*
@@ -371,7 +382,7 @@ I'm not the only one that's in your head
 Would you tell me if there was someone else instead?
 I don't wanna do this anymore
 I always thought I'd love you for a long time`,
-    favoriteStart: 75,
+    favoriteStart: 143,
   },
   {
     id: 5,
@@ -430,6 +441,6 @@ Do we give a damn
 Chorus
 Aaah, oooh
 Aaah, oooh`,
-    favoriteStart: 120,
+    favoriteStart: 248,
   },
 ]

@@ -151,22 +151,6 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                           exit={{ opacity: 0, x: slideDir * -40 }}
                           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                         >
-                          {song.triggerWarning && (
-                            <div
-                              className="mt-6 px-4 py-3 rounded-sm"
-                              style={{
-                                background: `${song.coverAccent}12`,
-                                border: `1px solid ${song.coverAccent}40`,
-                              }}
-                            >
-                              <p className="font-sans text-[9px] tracking-[0.3em] uppercase mb-1.5" style={{ color: `${song.coverAccent}90` }}>
-                                eerlijke waarschuwing
-                              </p>
-                              <p className="font-serif text-[13px] italic leading-relaxed" style={{ color: `${song.coverAccent}cc` }}>
-                                {song.triggerWarning}
-                              </p>
-                            </div>
-                          )}
 
                           {song.artistMeaning && (
                             <div
@@ -188,7 +172,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                               style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
                             >
                               <p className="font-sans text-[9px] tracking-[0.3em] uppercase mb-5" style={{ color: `${song.coverAccent}70` }}>
-                                Why I chose this song
+                                My personal note
                               </p>
                               <div className="space-y-4">
                                 {song.linerNote.split('\n\n').map((para, i) => {
@@ -207,9 +191,14 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                                       </blockquote>
                                     )
                                   }
+                                  const parts = para.split(/(\*\*[^*]+\*\*)/)
                                   return (
                                     <p key={i} className="font-sans text-[13px] md:text-[14px] leading-[1.85] text-cream-muted">
-                                      {para}
+                                      {parts.map((part, k) =>
+                                        part.startsWith('**') && part.endsWith('**')
+                                          ? <strong key={k} className="font-semibold text-cream">{part.slice(2, -2)}</strong>
+                                          : part
+                                      )}
                                     </p>
                                   )
                                 })}
@@ -264,12 +253,12 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                                       >
                                         {lines[0]}
                                       </p>
-                                      <div className="font-serif text-[14px] md:text-[15px] leading-[2] text-cream-muted space-y-0.5">
+                                      <div className="font-serif text-[14px] md:text-[15px] leading-[2] text-white space-y-0.5">
                                         {lines.slice(1).map((line, j) => renderLine(line, j))}
                                       </div>
                                     </>
                                   ) : (
-                                    <div className="font-serif text-[14px] md:text-[15px] leading-[2] text-cream-muted space-y-0.5">
+                                    <div className="font-serif text-[14px] md:text-[15px] leading-[2] text-white space-y-0.5">
                                       {lines.map((line, j) => renderLine(line, j))}
                                     </div>
                                   )}

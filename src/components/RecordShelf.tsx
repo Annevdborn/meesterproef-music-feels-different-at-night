@@ -23,11 +23,13 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
   const [isFavorite, setIsFavorite] = useState(false)
   const [armOnRecord, setArmOnRecord] = useState(false)
   const [isSpinning, setIsSpinning] = useState(false)
+  const [showStoryHint, setShowStoryHint] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const audioTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const armTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const storyHintTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const vinylOnRight = index % 2 === 0
   // armOnRight mirrors vinylOnRight: arm is always on the visible-edge side
@@ -52,19 +54,36 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
       armTimerRef.current = setTimeout(() => setArmOnRecord(true), 300)
       audioTimerRef.current = setTimeout(() => {
         const audio = getAudio()
-        if (audio) { audio.currentTime = 0; audio.play().catch(() => {}) }
+        if (audio) {
+          if (audio.paused) audio.currentTime = 0  // only reset on a fresh start
+          audio.playbackRate = rpm / 33
+          audio.play().catch(() => {})
+        }
       }, 1400)
+      storyHintTimerRef.current = setTimeout(() => setShowStoryHint(true), 3000)
     } else {
       clearTimeout(armTimerRef.current ?? undefined)
       clearTimeout(audioTimerRef.current ?? undefined)
       clearTimeout(favoriteEndTimerRef.current ?? undefined)
+      clearTimeout(storyHintTimerRef.current ?? undefined)
       audioRef.current?.pause()
       setIsSpinning(false)
       setArmOnRecord(false)
       setIsFavorite(false)
+      setShowStoryHint(false)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPlaying])
+
+  // Sync audio playback rate to RPM (45/33 ≈ 1.36×) — explicitly preserve position
+  // because some browsers reset currentTime on playbackRate change
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return
+    const savedTime = audio.currentTime
+    audio.playbackRate = rpm / 33
+    audio.currentTime = savedTime
+  }, [rpm])
 
   const handlePlayStop = () => {
     if (isPlaying) {
@@ -236,10 +255,10 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
           }`}
         >
           <p
-            className="font-sans text-[9px] tracking-[0.35em] uppercase mb-3"
+            className="font-sans font-semibold text-[9px] tracking-[0.35em] uppercase mb-3"
             style={{ color: `${song.coverAccent}90` }}
           >
-            for me this is {song.emotion} · {song.year}
+            for me this was {song.emotion} · {song.year}
           </p>
 
           <h3 className="font-serif text-[clamp(1.4rem,2.8vw,2.4rem)] text-cream leading-tight mb-2">
@@ -250,7 +269,7 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
 
           <div className="h-px w-8 mb-5" style={{ background: `${song.coverAccent}50` }} />
 
-          <p className="font-sans text-[9px] tracking-[0.25em] uppercase mb-3" style={{ color: `${song.coverAccent}70` }}>
+          <p className="font-sans font-semibold text-[9px] tracking-[0.25em] uppercase mb-3" style={{ color: `${song.coverAccent}70` }}>
             from my personal note
           </p>
 
@@ -258,24 +277,35 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
             {song.story}
           </p>
 
-          <motion.button
-            onClick={() => onOpenSleeve(song)}
-            className="self-start font-sans text-[11px] tracking-[0.25em] uppercase flex items-center gap-3 px-5 py-3 rounded-sm"
-            style={{
-              color: song.coverAccent,
-              border: `1px solid ${song.coverAccent}55`,
-              background: `${song.coverAccent}10`,
-            }}
-            whileHover={{
-              border: `1px solid ${song.coverAccent}bb`,
-              background: `${song.coverAccent}22`,
-              boxShadow: `0 0 24px 6px ${song.coverAccent}35`,
-            }}
-            transition={{ duration: 0.25 }}
-          >
-            My story with this song
-            <span style={{ opacity: 0.75 }}>→</span>
-          </motion.button>
+          {/* Per-song CSS keyframe for the story hint glow — avoids conflict with whileHover */}
+          <style>{`
+            @keyframes story-hint-${song.id} {
+              0%, 100% { box-shadow: 0 0 10px 2px ${song.coverAccent}25; border-color: ${song.coverAccent}70; }
+              50%       { box-shadow: 0 0 28px 8px ${song.coverAccent}55; border-color: ${song.coverAccent}cc; }
+            }
+          `}</style>
+
+          <div className="self-start relative">
+            <motion.button
+              onClick={() => { onOpenSleeve(song); setShowStoryHint(false) }}
+              className="font-sans text-[11px] tracking-[0.25em] uppercase flex items-center gap-3 px-5 py-3 rounded-sm"
+              style={{
+                color: song.coverAccent,
+                border: `1px solid ${song.coverAccent}55`,
+                background: `${song.coverAccent}10`,
+                animation: showStoryHint ? `story-hint-${song.id} 1.8s ease-in-out infinite` : 'none',
+              }}
+              whileHover={{
+                border: `1px solid ${song.coverAccent}bb`,
+                background: `${song.coverAccent}22`,
+                boxShadow: `0 0 24px 6px ${song.coverAccent}35`,
+              }}
+              transition={{ duration: 0.25 }}
+            >
+              My story with this song
+              <span style={{ opacity: 0.75 }}>→</span>
+            </motion.button>
+          </div>
         </div>
 
         {/* Vinyl disc — half clipped by overflow-hidden */}

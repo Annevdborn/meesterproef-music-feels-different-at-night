@@ -213,8 +213,8 @@ export default function VinylDisc({ song, isPlaying, isSpinning, rpm, audioRef }
         </span>
       </div>
 
-      {/* Spinning vinyl */}
-      <motion.div className="w-full h-full" style={{ rotate: rotation }}>
+      {/* Spinning vinyl — will-change lets browser cache filtered SVG as GPU texture */}
+      <motion.div className="w-full h-full" style={{ rotate: rotation, willChange: 'transform' }}>
         <svg viewBox="0 0 400 400" className="w-full h-full" aria-hidden="true">
           <defs>
             <clipPath id={`label-clip-${song.id}`}>
@@ -246,7 +246,7 @@ export default function VinylDisc({ song, isPlaying, isSpinning, rpm, audioRef }
               <defs>
                 {/* Cream/white tie-dye layer */}
                 <filter id={`tiedye-a-${song.id}`} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
-                  <feTurbulence type="turbulence" baseFrequency="0.014 0.014" numOctaves="5" seed="4" result="t" />
+                  <feTurbulence type="turbulence" baseFrequency="0.014 0.014" numOctaves="3" seed="4" result="t" />
                   <feColorMatrix type="matrix" in="t"
                     values="0 0 0 0 1  0 0 0 0 0.97  0 0 0 0 0.82  0 0 6 -2.8 0"
                     result="cream" />
@@ -254,7 +254,7 @@ export default function VinylDisc({ song, isPlaying, isSpinning, rpm, audioRef }
                 </filter>
                 {/* Deep yellow layer */}
                 <filter id={`tiedye-b-${song.id}`} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
-                  <feTurbulence type="turbulence" baseFrequency="0.02 0.008" numOctaves="4" seed="9" result="t" />
+                  <feTurbulence type="turbulence" baseFrequency="0.02 0.008" numOctaves="2" seed="9" result="t" />
                   <feColorMatrix type="matrix" in="t"
                     values="0 0 0 0 0.82  0 0 0 0 0.68  0 0 0 0 0  0 0 5 -2.5 0"
                     result="deep" />
@@ -305,7 +305,7 @@ export default function VinylDisc({ song, isPlaying, isSpinning, rpm, audioRef }
                 </radialGradient>
                 {/* Barely-there depth currents */}
                 <filter id={`sea-current-${song.id}`} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
-                  <feTurbulence type="turbulence" baseFrequency="0.006 0.009" numOctaves="6" seed="22" result="t" />
+                  <feTurbulence type="turbulence" baseFrequency="0.006 0.009" numOctaves="3" seed="22" result="t" />
                   <feColorMatrix type="matrix" in="t"
                     values="0 0 0 0 0.18  0 0 0 0 0.32  0 0 0 0 0.5  0 0 4 -2.0 0"
                     result="c" />
@@ -376,7 +376,7 @@ export default function VinylDisc({ song, isPlaying, isSpinning, rpm, audioRef }
                 </radialGradient>
                 {/* Subtle smoke — barely there, just enough depth */}
                 <filter id={`earth-smoke-${song.id}`} x="-5%" y="-5%" width="110%" height="110%" colorInterpolationFilters="sRGB">
-                  <feTurbulence type="turbulence" baseFrequency="0.009 0.013" numOctaves="4" seed="17" result="t" />
+                  <feTurbulence type="turbulence" baseFrequency="0.009 0.013" numOctaves="2" seed="17" result="t" />
                   <feColorMatrix type="matrix" in="t"
                     values="0 0 0 0 0.6  0 0 0 0 0.04  0 0 0 0 0.04  0 0 3.5 -1.8 0"
                     result="s" />

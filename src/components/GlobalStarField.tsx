@@ -16,21 +16,21 @@ interface Star {
 
 export default function GlobalStarField() {
   const [stars, setStars] = useState<Star[]>([])
-  const { scrollY } = useScroll()
+  const { scrollYProgress } = useScroll()
 
-  const y = useTransform(scrollY, [0, 4000], ['0%', '-50%'])
-  const opacity = useTransform(scrollY, [0, 800, 2000], [1, 0.85, 0.55])
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '-50%'])
+  const opacity = useTransform(scrollYProgress, [0, 0.08, 0.4], [1, 0.85, 0.55])
 
   useEffect(() => {
     const generated: Star[] = Array.from({ length: 120 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 200,
-      size: Math.random() < 0.6 ? 1 : Math.random() < 0.75 ? 1.5 : 2,
+      size: Math.random() < 0.6 ? 1.5 : Math.random() < 0.75 ? 2.5 : 3.5,
       twinkle: Math.random() < 0.35,
       delay: Math.random() * 8,
       duration: 2 + Math.random() * 4,
-      opacity: 0.65 + Math.random() * 0.35,
+      opacity: 0.8 + Math.random() * 0.2,
     }))
     setStars(generated)
   }, [])
@@ -57,7 +57,7 @@ export default function GlobalStarField() {
               height: star.size,
               opacity: star.twinkle ? undefined : star.opacity,
               // CSS custom properties drive the keyframe — zero JS per frame
-              ['--dim' as string]: star.opacity * 0.15,
+              ['--dim' as string]: star.opacity * 0.3,
               ['--bright' as string]: star.opacity,
               animation: star.twinkle
                 ? `star-twinkle ${star.duration}s ${star.delay}s infinite ease-in-out`
