@@ -362,16 +362,15 @@ And there you are
 Always keep you on the left side of my head
 And I guess that makes sense
 While you keep me in the cracks beneath the door
+
 And I can't say I'm sorry
 'Cause I know that it takes two to play the game
 And neither one of us will win the race
 But somehow I always lose a little more
 
-Pre-Chorus
+Chorus
 It's always one more talk and we'll be back again
 But I'm the only one who cares to see the end
-
-Chorus
 Oh, I'm looking in your eyes and all I see
 Is you don't need me
 I'm the only one who plays for keeps
@@ -381,7 +380,32 @@ And I'm sure
 I'm not the only one that's in your head
 Would you tell me if there was someone else instead?
 I don't wanna do this anymore
-I always thought I'd love you for a long time`,
+I always thought I'd love you for a long time
+
+Chorus
+It's always one more talk and we'll be back again
+But I'm the only one who cares to see the end
+Oh, I'm looking in your eyes and all I see
+Is you don't need me
+I'm the only one who plays
+
+Bridge
+I hold my cards closer to my chest
+While you sit right across
+The table where we used to dance
+You'd spin me back and forth
+But now I'm dizzy
+I could quit now, I could hold on
+But either way I lose
+And I lose
+
+Chorus
+It's always one more talk and we'll be back again
+But I'm the only one who cares to see the end
+Oh, I'm looking in your eyes and all I see
+Is you don't need me
+I'm the only one who plays for keeps`,
+    highlightedStanzas: [6],
     favoriteStart: 143,
   },
   {
