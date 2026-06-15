@@ -507,47 +507,53 @@ function playCurtainSound() {
     const ctx = new (window.AudioContext || (window as never as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)()
     const t = ctx.currentTime
 
-    // Fabric whoosh — bandpass-filtered white noise
-    const bufSize = Math.floor(ctx.sampleRate * 1.0)
-    const buf = ctx.createBuffer(1, bufSize, ctx.sampleRate)
-    const data = buf.getChannelData(0)
-    for (let i = 0; i < bufSize; i++) data[i] = Math.random() * 2 - 1
+    const makeNoiseBuf = (dur: number) => {
+      const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate)
+      const d = buf.getChannelData(0)
+      for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1
+      const src = ctx.createBufferSource()
+      src.buffer = buf
+      return src
+    }
 
-    const noise = ctx.createBufferSource()
-    noise.buffer = buf
+    // Main swoosh — low-mid body of the curtain movement
+    const swoosh = makeNoiseBuf(1.1)
+    const swooshF = ctx.createBiquadFilter()
+    swooshF.type = 'bandpass'
+    swooshF.frequency.value = 500
+    swooshF.Q.value = 0.6
+    const swooshG = ctx.createGain()
+    swooshG.gain.setValueAtTime(0, t)
+    swooshG.gain.linearRampToValueAtTime(0.45, t + 0.12)
+    swooshG.gain.setValueAtTime(0.45, t + 0.65)
+    swooshG.gain.linearRampToValueAtTime(0, t + 1.1)
+    swoosh.connect(swooshF); swooshF.connect(swooshG); swooshG.connect(ctx.destination)
+    swoosh.start(t)
 
-    const filter = ctx.createBiquadFilter()
-    filter.type = 'bandpass'
-    filter.frequency.value = 2200
-    filter.Q.value = 1.0
+    // Fabric rustle — high-frequency texture of the cloth
+    const rustle = makeNoiseBuf(1.0)
+    const rustleF = ctx.createBiquadFilter()
+    rustleF.type = 'highpass'
+    rustleF.frequency.value = 2800
+    const rustleG = ctx.createGain()
+    rustleG.gain.setValueAtTime(0, t)
+    rustleG.gain.linearRampToValueAtTime(0.12, t + 0.08)
+    rustleG.gain.setValueAtTime(0.12, t + 0.6)
+    rustleG.gain.linearRampToValueAtTime(0, t + 0.9)
+    rustle.connect(rustleF); rustleF.connect(rustleG); rustleG.connect(ctx.destination)
+    rustle.start(t)
 
-    const noiseGain = ctx.createGain()
-    noiseGain.gain.setValueAtTime(0, t)
-    noiseGain.gain.linearRampToValueAtTime(0.18, t + 0.06)
-    noiseGain.gain.setValueAtTime(0.18, t + 0.65)
-    noiseGain.gain.linearRampToValueAtTime(0, t + 1.0)
-
-    noise.connect(filter)
-    filter.connect(noiseGain)
-    noiseGain.connect(ctx.destination)
-    noise.start(t)
-
-    // Rail rings — 3 metallic tings sliding along the pole
-    ;[0.04, 0.28, 0.52].forEach(offset => {
-      const osc = ctx.createOscillator()
-      osc.type = 'sine'
-      osc.frequency.setValueAtTime(1600, t + offset)
-      osc.frequency.exponentialRampToValueAtTime(380, t + offset + 0.14)
-
-      const ringGain = ctx.createGain()
-      ringGain.gain.setValueAtTime(0.07, t + offset)
-      ringGain.gain.exponentialRampToValueAtTime(0.001, t + offset + 0.18)
-
-      osc.connect(ringGain)
-      ringGain.connect(ctx.destination)
-      osc.start(t + offset)
-      osc.stop(t + offset + 0.2)
-    })
+    // Soft thud — curtains meeting in the middle
+    const thud = makeNoiseBuf(0.3)
+    const thudF = ctx.createBiquadFilter()
+    thudF.type = 'lowpass'
+    thudF.frequency.value = 180
+    const thudG = ctx.createGain()
+    thudG.gain.setValueAtTime(0, t + 0.78)
+    thudG.gain.linearRampToValueAtTime(0.35, t + 0.84)
+    thudG.gain.linearRampToValueAtTime(0, t + 1.0)
+    thud.connect(thudF); thudF.connect(thudG); thudG.connect(ctx.destination)
+    thud.start(t + 0.78)
   } catch {
     // AudioContext not available
   }
