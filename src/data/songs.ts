@@ -323,7 +323,7 @@ The love ran out`,
     coverAccent: '#6888a4',
     coverImage: '/covers/for-keeps.jpg',
     audioSrc: '/audio/for-keeps.mp3',
-    story: `"There's something about a song that names the thing you could never say out loud.\nThe feeling of being the only one who's still trying.\nOf loving someone who has already quietly let go."`,
+    story: `"Now, two years after the breakup, the song feels different.\nThe sadness is still there somewhere,\nbut it no longer defines the way I hear it."`,
     artistMeaning: `For Keeps is Emyrson Flora's portrait of unequal love — being the one who is still fully invested while the other person has already quietly moved on. She wrote it about that specific, painful moment when you realise you are the only one still playing for keeps. The voicemail at the start sets the tone: a call that goes unanswered, a connection that has already slipped away.`,
     linerNote: `For Keeps came into my life at a strange time. If you only listened to the song, you would probably assume it belongs on a heartbreak playlist. And honestly, it does. The funny thing is that I only discovered it after my heartbreak had already happened. Sometimes I wonder how much more it would have meant if I had found it while I was going through it.
 
@@ -395,9 +395,21 @@ I always thought I'd love you for a long time`,
     cursorHintColor: '#f07060',
     coverImage: '/covers/earth-song.jpg',
     audioSrc: '/audio/earth-song.mp3',
-    story: `"I grew up with this song playing in the background — I didn't fully understand it then.\nNow I do, and I wish I didn't.\nSome songs get heavier the older you get."`,
+    story: `"I hope that later in life, if I ever have children,\nI can play this song and say:\n'your grandma always said this was the most beautiful Michael Jackson song.'"`,
     artistMeaning: `Earth Song was Michael Jackson's most overtly political statement — a sweeping meditation on environmental destruction, war, and human suffering. He wrote it after years of witnessing the damage being done to the natural world and to people around the globe. The song is a direct cry asking why we continue to destroy the planet and each other, and whether it is already too late to turn things around.`,
-    linerNote: `[Your personal liner note about Earth Song will go here. What does this song mean to you? When do you listen to it? What memory or feeling does it bring up?]`,
+    linerNote: `The last song I want to talk about is one that I think almost everyone knows.
+
+My mother and I have quite different music tastes, and whenever we are cleaning the house, baking, cooking, or just doing something together, I always find it hard to choose music. Our preferences are just very different, so it is not always easy to find something that fits both of us.
+
+When I am at home in the evening and I feel like listening to older music, I naturally end up playing songs from Michael Jackson. And this specific song always brings me back to those moments with my mother.
+
+I remember how I would put it on while we were doing something around the house, and she would always say the same thing. "I think this is the most beautiful Michael Jackson song ever." She says it every single time, and I think I must have heard it at least a hundred times by now.
+
+And I know that in the future, when we are doing something together again and I am once more struggling to choose music, I will probably put this song on again. And she will say the exact same thing, just like she always does.
+
+My mother also thinks she can sing, even though she really should probably save that for the shower. And even with this song, I can hear her softly singing along in my head when I listen to it. It gives me a warm feeling, because music means a lot to both of us, even though we do not share the same genres. We still share the same kind of passion for it, and that feels very connecting to me.
+
+And I think that feeling is exactly what makes this song so special to me.`,
     lyrics: `Verse 1
 What about sunrise
 What about rain
