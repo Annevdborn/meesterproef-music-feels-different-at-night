@@ -415,10 +415,12 @@ What about sunrise?
 What about rain?
 What about all the things
 That you said we were to gain?
+
 What about killing fields?
 Is there a time?
 What about all the things
 That you said was yours and mine?
+
 Did you ever stop to notice
 All the blood we've shed before?
 Did you ever stop to notice
@@ -427,22 +429,28 @@ This crying Earth, these weeping shores?
 Chorus
 Ah-ah-ah-ah-ah-ah
 Ooh-ooh-ooh-ooh-ooh
+Ah-ah-ah-ah-ah-ah
+Ooh-ooh-ooh-ooh-ooh
 
 Verse 2
 What have we done to the world?
 Look what we've done
 What about all the peace
 That you pledge your only son?
+
 What about flowering fields?
 Is there a time?
 What about all the dreams
 That you said was yours and mine?
+
 Did you ever stop to notice
 All the children dead from war?
 Did you ever stop to notice
 This crying Earth, these weeping shores?
 
 Chorus
+Ah-ah-ah-ah-ah-ah
+Ooh-ooh-ooh-ooh-ooh
 Ah-ah-ah-ah-ah-ah
 Ooh-ooh-ooh-ooh-ooh
 
@@ -458,43 +466,57 @@ Ooh-ooh-ooh-ooh-ooh
 Ah-ah-ah-ah-ah-ah
 Ooh-ooh-ooh-ooh-ooh
 
+Ah-ah-ah-ah-ah-ah
+Ooh-ooh-ooh-ooh-ooh
+Ah-ah-ah-ah-ah-ah
+Ooh-ooh-ooh-ooh-ooh
+
 Outro
 Hey, what about yesterday? (What about us?)
 What about the seas? (What about us?)
 The heavens are falling down (what about us?)
 I can't even breathe (what about us?)
+
 What about apathy? (What about us?)
 I need you (what about us?)
 What about nature's worth? (Ooh)
 It's our planet's womb (what about us?)
+
 What about animals? (What about it?)
 Turned kingdoms to dust (what about us?)
 What about elephants? (What about us?)
 Have we lost their trust? (What about us?)
+
 What about crying whales? (What about us?)
 Ravaging the seas (what about us?)
 What about forest trails (ooh)
 Burnt despite our pleas? (What about us?)
+
 What about the holy land? (What about it?)
 Torn apart by greed (what about us?)
 What about the common man? (What about us?)
 Can't we set him free? (What about us?)
+
 What about children dying? (What about us?)
 Can't you hear them cry? (What about us?)
 Where did we go wrong? (Ooh)
 Someone tell me why (what about us?)
+
 What about baby boy? (What about it?)
 What about the days? (What about us?)
 What about all their joy? (What about us?)
 What about the man? (What about us?)
+
 What about the crying man? (What about us?)
 What about Abraham? (What about us?)
 What about death again? (Ooh)
 Do we give a damn?
 
-Ah-ah
+Ah-ah (whoo, whoo, whoo, whoo)
+Ooh-ooh-ooh (whoo, whoo, whoo, whoo)
+Ah-ah (whoo, whoo, whoo, whoo)
 Ooh-ooh-ooh`,
-    highlightedStanzas: [6],
+    highlightedStanzas: [11, 12, 13, 14, 15, 16, 17, 18],
     favoriteStart: 248,
   },
 ]
