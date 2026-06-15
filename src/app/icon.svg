@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <radialGradient id="moonbase" cx="36%" cy="30%" r="65%">
+      <stop offset="0%"   stop-color="#dedad2" />
+      <stop offset="35%"  stop-color="#b4b0a8" />
+      <stop offset="70%"  stop-color="#7e7a74" />
+      <stop offset="100%" stop-color="#48443e" />
+    </radialGradient>
+    <radialGradient id="mare1" cx="30%" cy="35%" r="30%">
+      <stop offset="0%"   stop-color="rgba(52,48,44,0.7)" />
+      <stop offset="100%" stop-color="transparent" />
+    </radialGradient>
+    <radialGradient id="mare2" cx="68%" cy="65%" r="25%">
+      <stop offset="0%"   stop-color="rgba(48,44,40,0.55)" />
+      <stop offset="100%" stop-color="transparent" />
+    </radialGradient>
+    <radialGradient id="sunlit" cx="28%" cy="26%" r="48%">
+      <stop offset="0%"   stop-color="rgba(255,252,244,0.5)" />
+      <stop offset="60%"  stop-color="rgba(240,236,228,0.1)" />
+      <stop offset="100%" stop-color="transparent" />
+    </radialGradient>
+    <radialGradient id="limb" cx="50%" cy="50%" r="50%">
+      <stop offset="72%"  stop-color="transparent" />
+      <stop offset="90%"  stop-color="rgba(28,24,20,0.55)" />
+      <stop offset="100%" stop-color="rgba(8,6,4,0.94)" />
+    </radialGradient>
+  </defs>
+
+  <!-- Moon base -->
+  <circle cx="16" cy="16" r="15.5" fill="url(#moonbase)" />
+  <circle cx="16" cy="16" r="15.5" fill="url(#mare1)" />
+  <circle cx="16" cy="16" r="15.5" fill="url(#mare2)" />
+
+  <!-- Craters -->
+  <circle cx="10" cy="9"  r="1.8" fill="rgba(46,42,38,0.45)" />
+  <circle cx="10" cy="9"  r="1.8" fill="none" stroke="rgba(200,196,188,0.45)" stroke-width="0.4" />
+
+  <circle cx="22" cy="11" r="1.2" fill="rgba(44,40,36,0.4)" />
+  <circle cx="22" cy="11" r="1.2" fill="none" stroke="rgba(190,186,178,0.38)" stroke-width="0.35" />
+
+  <circle cx="12" cy="21" r="2.2" fill="rgba(48,44,40,0.42)" />
+  <circle cx="12" cy="21" r="2.2" fill="none" stroke="rgba(195,191,183,0.4)" stroke-width="0.45" />
+  <circle cx="12.2" cy="20.8" r="0.5" fill="rgba(215,211,203,0.3)" />
+
+  <circle cx="23" cy="20" r="1.4" fill="rgba(44,40,36,0.35)" />
+  <circle cx="23" cy="20" r="1.4" fill="none" stroke="rgba(185,181,173,0.35)" stroke-width="0.35" />
+
+  <!-- Sunlit zone + limb darkening -->
+  <circle cx="16" cy="16" r="15.5" fill="url(#sunlit)" />
+  <circle cx="16" cy="16" r="15.5" fill="url(#limb)" />
+</svg>
