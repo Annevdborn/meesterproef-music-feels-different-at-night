@@ -270,22 +270,27 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
             0%, 100% { opacity: var(--bright); }
             50%      { opacity: var(--dim); }
           }
-          @keyframes sleep-breathe {
-            0%, 100% { border-color: rgba(200,169,110,0.25); box-shadow: 0 0 10px rgba(200,169,110,0.08); }
-            50%       { border-color: rgba(200,169,110,0.6);  box-shadow: 0 0 22px rgba(200,169,110,0.22); }
+          @keyframes sleep-bounce {
+            0%,  100% { transform: translateY(0); }
+            7%         { transform: translateY(-10px); }
+            14%        { transform: translateY(0); }
+            21%        { transform: translateY(-5px); }
+            28%        { transform: translateY(0); }
           }
           .sleep-btn {
             display: inline-flex;
             align-items: center;
             gap: 0.55rem;
-            border: 1px solid rgba(200,169,110,0.3);
+            border: 1px solid rgba(200,169,110,0.4);
             border-radius: 100px;
             padding: 0.45rem 1.2rem;
-            animation: sleep-breathe 3.5s ease-in-out infinite;
-            transition: background 0.4s;
+            box-shadow: 0 0 12px rgba(200,169,110,0.12);
+            animation: sleep-bounce 4s ease-in-out infinite;
+            transition: border-color 0.4s, box-shadow 0.4s, background 0.4s;
           }
           .sleep-btn:hover {
             animation: none;
+            transform: translateY(0);
             border-color: rgba(200,169,110,0.8);
             box-shadow: 0 0 28px rgba(200,169,110,0.3);
             background: rgba(200,169,110,0.06);
