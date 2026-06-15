@@ -465,7 +465,7 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
               color: 'rgba(200,169,110,0.4)',
               fontStyle: 'italic',
             }}>
-              — Anne
+              — Anne van den Born
             </span>
             <span style={{
               fontFamily: 'Georgia, serif',
