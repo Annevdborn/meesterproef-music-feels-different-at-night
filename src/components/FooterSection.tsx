@@ -271,22 +271,40 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
             50%      { opacity: var(--dim); }
           }
           @keyframes sleep-breathe {
-            0%, 100% { opacity: 0.5; }
-            50%       { opacity: 1; }
+            0%, 100% { border-color: rgba(200,169,110,0.25); box-shadow: 0 0 10px rgba(200,169,110,0.08); }
+            50%       { border-color: rgba(200,169,110,0.6);  box-shadow: 0 0 22px rgba(200,169,110,0.22); }
           }
-          .sleep-btn { animation: sleep-breathe 3.5s ease-in-out infinite; }
-          .sleep-btn:hover { animation: none; opacity: 1; }
+          .sleep-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            border: 1px solid rgba(200,169,110,0.3);
+            border-radius: 100px;
+            padding: 0.45rem 1.2rem;
+            animation: sleep-breathe 3.5s ease-in-out infinite;
+            transition: background 0.4s;
+          }
+          .sleep-btn:hover {
+            animation: none;
+            border-color: rgba(200,169,110,0.8);
+            box-shadow: 0 0 28px rgba(200,169,110,0.3);
+            background: rgba(200,169,110,0.06);
+          }
           .sleep-btn .sleep-text {
-            color: rgba(255,255,255,0.85);
-            text-shadow: 0 0 16px rgba(200,169,110,0.5);
-            transition: text-shadow 0.5s;
+            color: rgba(255,255,255,0.8);
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+            letter-spacing: 0.04em;
+            transition: color 0.4s;
           }
+          .sleep-btn:hover .sleep-text { color: rgba(255,255,255,1); }
           .sleep-btn .sleep-moon {
             color: rgba(200,169,110,0.7);
-            transition: color 0.5s, transform 0.5s;
+            font-size: 16px;
+            transition: color 0.4s, transform 0.4s;
           }
-          .sleep-btn:hover .sleep-text { text-shadow: 0 0 24px rgba(200,169,110,0.85); }
-          .sleep-btn:hover .sleep-moon { color: rgba(200,169,110,1); transform: translateY(-3px); }
+          .sleep-btn:hover .sleep-moon { color: rgba(200,169,110,1); transform: translateY(-2px); }
         `}</style>
 
         {/* Twinkling stars — CSS animation, zero JS per frame */}
@@ -465,13 +483,11 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
             <button
               onClick={onSleep}
               className="sleep-btn"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '0.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', margin: '0 auto' }}
+              style={{ background: 'none', cursor: 'pointer', margin: '0 auto' }}
               aria-label="Sluit je ogen en ga terug naar het begin"
             >
-              <span className="sleep-text" style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: 'clamp(0.8rem, 1.3vw, 1rem)', letterSpacing: '0.04em' }}>
-                ready to sleep?
-              </span>
-              <span className="sleep-moon" style={{ fontSize: 22, display: 'block' }}>☽</span>
+              <span className="sleep-moon">☽</span>
+              <span className="sleep-text">ready to sleep?</span>
             </button>
           </motion.div>
 
