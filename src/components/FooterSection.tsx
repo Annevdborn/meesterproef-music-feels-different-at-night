@@ -137,46 +137,68 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
             <svg viewBox="0 0 200 200" width="100%" height="100%" aria-hidden="true">
               <defs>
                 <radialGradient id="vf-base" cx="35%" cy="30%" r="75%">
-                  <stop offset="0%"   stopColor="#1c1628" />
-                  <stop offset="50%"  stopColor="#0e0a18" />
-                  <stop offset="100%" stopColor="#060410" />
+                  <stop offset="0%"   stopColor="#181428" />
+                  <stop offset="50%"  stopColor="#0c0a1c" />
+                  <stop offset="100%" stopColor="#050410" />
                 </radialGradient>
-                <radialGradient id="vf-sheen" cx="30%" cy="26%" r="58%">
-                  <stop offset="0%"   stopColor="rgba(180,160,240,0.32)" />
-                  <stop offset="45%"  stopColor="rgba(110,90,190,0.1)" />
+                {/* Moon surface patch upper-left */}
+                <radialGradient id="vf-mare" cx="32%" cy="34%" r="34%">
+                  <stop offset="0%"   stopColor="rgba(38,34,58,0.65)" />
+                  <stop offset="100%" stopColor="transparent" />
+                </radialGradient>
+                {/* Moonlight glow — cool blue-white */}
+                <radialGradient id="vf-moon" cx="28%" cy="24%" r="55%">
+                  <stop offset="0%"   stopColor="rgba(200,210,245,0.2)" />
+                  <stop offset="50%"  stopColor="rgba(160,175,225,0.07)" />
                   <stop offset="100%" stopColor="transparent" />
                 </radialGradient>
                 <radialGradient id="vf-edge" cx="50%" cy="50%" r="50%">
                   <stop offset="78%"  stopColor="transparent" />
-                  <stop offset="93%"  stopColor="rgba(0,0,0,0.7)" />
-                  <stop offset="100%" stopColor="rgba(0,0,0,0.95)" />
+                  <stop offset="93%"  stopColor="rgba(0,0,0,0.72)" />
+                  <stop offset="100%" stopColor="rgba(0,0,0,0.96)" />
                 </radialGradient>
               </defs>
 
               {/* Dark vinyl base */}
               <circle cx="100" cy="100" r="99" fill="url(#vf-base)" />
 
-              {/* Grooves — 22 rings, clearly visible on dark background */}
-              {Array.from({ length: 22 }, (_, i) => (
-                <circle
-                  key={i}
-                  cx="100" cy="100"
-                  r={30 + i * 3.1}
+              {/* Grooves — 20 rings */}
+              {Array.from({ length: 20 }, (_, i) => (
+                <circle key={i} cx="100" cy="100" r={30 + i * 3.3}
                   fill="none"
-                  stroke={i % 2 === 0 ? 'rgba(210,190,255,0.2)' : 'rgba(140,120,210,0.08)'}
-                  strokeWidth={i % 2 === 0 ? 0.8 : 0.4}
+                  stroke={i % 2 === 0 ? 'rgba(175,185,225,0.18)' : 'rgba(120,130,185,0.08)'}
+                  strokeWidth={i % 2 === 0 ? 0.75 : 0.38}
                 />
               ))}
 
-              {/* Iridescent sheen */}
-              <circle cx="100" cy="100" r="99" fill="url(#vf-sheen)" />
+              {/* Moon surface patches */}
+              <circle cx="100" cy="100" r="99" fill="url(#vf-mare)" />
+              <circle cx="100" cy="100" r="99" fill="url(#vf-moon)" />
+
+              {/* Craters — minimal, 2 elements each */}
+              <circle cx="62"  cy="57"  r="8"   fill="rgba(28,22,48,0.55)" />
+              <circle cx="62"  cy="57"  r="8"   fill="none" stroke="rgba(185,192,230,0.3)" strokeWidth="0.9" />
+              <circle cx="138" cy="72"  r="5.5" fill="rgba(26,20,46,0.5)"  />
+              <circle cx="138" cy="72"  r="5.5" fill="none" stroke="rgba(175,182,220,0.25)" strokeWidth="0.7" />
+              <circle cx="76"  cy="142" r="10"  fill="rgba(30,24,50,0.45)" />
+              <circle cx="76"  cy="142" r="10"  fill="none" stroke="rgba(178,186,222,0.28)" strokeWidth="0.85" />
+
+              {/* Stars — tiny dots scattered across the surface */}
+              <circle cx="45"  cy="34"  r="0.9" fill="rgba(225,230,255,0.75)" />
+              <circle cx="156" cy="46"  r="0.7" fill="rgba(225,230,255,0.6)"  />
+              <circle cx="170" cy="128" r="0.8" fill="rgba(225,230,255,0.65)" />
+              <circle cx="30"  cy="155" r="0.6" fill="rgba(225,230,255,0.55)" />
+              <circle cx="166" cy="72"  r="0.6" fill="rgba(225,230,255,0.5)"  />
+              <circle cx="37"  cy="90"  r="0.7" fill="rgba(225,230,255,0.55)" />
+              <circle cx="120" cy="168" r="0.5" fill="rgba(225,230,255,0.45)" />
+
               {/* Edge darkening */}
               <circle cx="100" cy="100" r="99" fill="url(#vf-edge)" />
 
               {/* Center label */}
-              <circle cx="100" cy="100" r="22" fill="#08060e" />
-              <circle cx="100" cy="100" r="22" fill="none" stroke="rgba(160,140,220,0.25)" strokeWidth="0.8" />
-              <circle cx="100" cy="100" r="3"  fill="#14101e" />
+              <circle cx="100" cy="100" r="22" fill="#07060f" />
+              <circle cx="100" cy="100" r="22" fill="none" stroke="rgba(165,172,215,0.22)" strokeWidth="0.7" />
+              <circle cx="100" cy="100" r="2.8" fill="#12101c" />
             </svg>
           </motion.div>
         </div>
