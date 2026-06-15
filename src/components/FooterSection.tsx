@@ -1,6 +1,7 @@
 'use client'
 
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 
 const SPOTIFY_URL = 'https://open.spotify.com/user/annexx2001'
@@ -32,6 +33,50 @@ const STARS = [
   { x: 97, y: 22, r: 0.9, o: 0.36, d: 2.9, delay: 2.4 },
   { x: 2,  y: 15, r: 0.6, o: 0.24, d: 4.3, delay: 1.5 },
 ]
+
+function Curtains({ visible }: { visible: boolean }) {
+  return (
+    <>
+      {/* Left curtain */}
+      <motion.div
+        style={{
+          position: 'fixed', top: 0, left: 0, height: '100vh', width: '51%', zIndex: 9999,
+          pointerEvents: 'none',
+          background: 'repeating-linear-gradient(to right, rgba(255,255,255,0.022) 0px, rgba(0,0,0,0) 4px, rgba(255,255,255,0.012) 8px, rgba(0,0,0,0) 13px, rgba(255,255,255,0.018) 17px, rgba(0,0,0,0) 22px), linear-gradient(160deg, #100d22 0%, #0c091a 50%, #080613 100%)',
+        }}
+        animate={{ x: visible ? '0%' : '-100%' }}
+        initial={{ x: '-100%' }}
+        transition={{ duration: 0.85, ease: [0.4, 0, 0.15, 1] }}
+      />
+      {/* Right curtain */}
+      <motion.div
+        style={{
+          position: 'fixed', top: 0, right: 0, height: '100vh', width: '51%', zIndex: 9999,
+          pointerEvents: 'none',
+          background: 'repeating-linear-gradient(to left, rgba(255,255,255,0.022) 0px, rgba(0,0,0,0) 4px, rgba(255,255,255,0.012) 8px, rgba(0,0,0,0) 13px, rgba(255,255,255,0.018) 17px, rgba(0,0,0,0) 22px), linear-gradient(200deg, #100d22 0%, #0c091a 50%, #080613 100%)',
+        }}
+        animate={{ x: visible ? '0%' : '100%' }}
+        initial={{ x: '100%' }}
+        transition={{ duration: 0.85, ease: [0.4, 0, 0.15, 1] }}
+      />
+      {/* Good night message — fades in once curtains are closed */}
+      <motion.div
+        style={{
+          position: 'fixed', inset: 0, zIndex: 10000, pointerEvents: 'none',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.75rem',
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: visible ? 1 : 0 }}
+        transition={{ duration: 0.5, delay: visible ? 0.7 : 0 }}
+      >
+        <span style={{ fontSize: 28, color: 'rgba(200,169,110,0.65)' }}>☽</span>
+        <p style={{ fontFamily: 'Georgia, serif', fontSize: 11, letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.32)' }}>
+          good night
+        </p>
+      </motion.div>
+    </>
+  )
+}
 
 // Shooting star moves from upper-right to lower-left at ~30° below horizontal.
 // rotate: -30 aligns the streak with its own direction of travel.
@@ -71,7 +116,7 @@ function ShootingStar({ top, left, delay }: { top: string; left: string; delay: 
   )
 }
 
-function VinylIntoSleeve() {
+function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
   const vinylRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const inView = useInView(contentRef, { once: true, margin: '-80px' })
@@ -225,6 +270,10 @@ function VinylIntoSleeve() {
             0%, 100% { opacity: var(--bright); }
             50%      { opacity: var(--dim); }
           }
+          .sleep-btn .sleep-text { color: rgba(255,255,255,0.18); transition: color 0.8s; }
+          .sleep-btn .sleep-moon { color: rgba(200,169,110,0.22); transition: color 0.8s, transform 0.8s; }
+          .sleep-btn:hover .sleep-text { color: rgba(255,255,255,0.5); }
+          .sleep-btn:hover .sleep-moon { color: rgba(200,169,110,0.6); transform: translateY(-3px); }
         `}</style>
 
         {/* Twinkling stars — CSS animation, zero JS per frame */}
@@ -393,6 +442,26 @@ function VinylIntoSleeve() {
             </span>
           </motion.div>
 
+          {/* Sleep CTA */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 2.5, delay: 1.8 }}
+            style={{ textAlign: 'center', marginTop: '5rem', paddingBottom: '1rem' }}
+          >
+            <button
+              onClick={onSleep}
+              className="sleep-btn"
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '1rem 2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', margin: '0 auto' }}
+              aria-label="Sluit je ogen en ga terug naar het begin"
+            >
+              <span className="sleep-text" style={{ fontFamily: 'Georgia, serif', fontStyle: 'italic', fontSize: 'clamp(0.8rem, 1.3vw, 1rem)', letterSpacing: '0.04em' }}>
+                ready to sleep?
+              </span>
+              <span className="sleep-moon" style={{ fontSize: 22, display: 'block' }}>☽</span>
+            </button>
+          </motion.div>
+
         </div>
       </div>
     </div>
@@ -400,11 +469,25 @@ function VinylIntoSleeve() {
 }
 
 export default function FooterSection() {
+  const [curtainsVisible, setCurtainsVisible] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => setMounted(true), [])
+
+  const handleSleep = () => {
+    setCurtainsVisible(true)
+    setTimeout(() => window.scrollTo({ top: 0 }), 850)
+    setTimeout(() => setCurtainsVisible(false), 1500)
+  }
+
   return (
-    <footer className="relative overflow-hidden">
-      <div style={{ width: '100vw', position: 'relative', left: '50%', transform: 'translateX(-50%)' }}>
-        <VinylIntoSleeve />
-      </div>
-    </footer>
+    <>
+      <footer className="relative overflow-hidden">
+        <div style={{ width: '100vw', position: 'relative', left: '50%', transform: 'translateX(-50%)' }}>
+          <VinylIntoSleeve onSleep={handleSleep} />
+        </div>
+      </footer>
+      {mounted && createPortal(<Curtains visible={curtainsVisible} />, document.body)}
+    </>
   )
 }
