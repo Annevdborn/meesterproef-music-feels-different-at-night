@@ -270,10 +270,19 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
             0%, 100% { opacity: var(--bright); }
             50%      { opacity: var(--dim); }
           }
-          .sleep-btn .sleep-text { color: rgba(255,255,255,0.18); transition: color 0.8s; }
-          .sleep-btn .sleep-moon { color: rgba(200,169,110,0.22); transition: color 0.8s, transform 0.8s; }
-          .sleep-btn:hover .sleep-text { color: rgba(255,255,255,0.5); }
-          .sleep-btn:hover .sleep-moon { color: rgba(200,169,110,0.6); transform: translateY(-3px); }
+          @keyframes sleep-breathe {
+            0%, 100% { box-shadow: 0 0 14px rgba(200,169,110,0.12), 0 0 0 1px rgba(200,169,110,0.15); }
+            50%       { box-shadow: 0 0 28px rgba(200,169,110,0.28), 0 0 0 1px rgba(200,169,110,0.35); }
+          }
+          .sleep-btn {
+            animation: sleep-breathe 3s ease-in-out infinite;
+            border-radius: 4px;
+          }
+          .sleep-btn .sleep-text { color: rgba(255,255,255,0.65); transition: color 0.5s; }
+          .sleep-btn .sleep-moon { color: rgba(200,169,110,0.6); transition: color 0.5s, transform 0.5s; }
+          .sleep-btn:hover { animation: none; box-shadow: 0 0 36px rgba(200,169,110,0.4), 0 0 0 1px rgba(200,169,110,0.55); }
+          .sleep-btn:hover .sleep-text { color: rgba(255,255,255,0.95); }
+          .sleep-btn:hover .sleep-moon { color: rgba(200,169,110,0.9); transform: translateY(-3px); }
         `}</style>
 
         {/* Twinkling stars — CSS animation, zero JS per frame */}
