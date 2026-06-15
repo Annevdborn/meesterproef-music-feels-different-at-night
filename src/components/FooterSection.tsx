@@ -502,6 +502,57 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
   )
 }
 
+function playCurtainSound() {
+  try {
+    const ctx = new (window.AudioContext || (window as never as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)()
+    const t = ctx.currentTime
+
+    // Fabric whoosh — bandpass-filtered white noise
+    const bufSize = Math.floor(ctx.sampleRate * 1.0)
+    const buf = ctx.createBuffer(1, bufSize, ctx.sampleRate)
+    const data = buf.getChannelData(0)
+    for (let i = 0; i < bufSize; i++) data[i] = Math.random() * 2 - 1
+
+    const noise = ctx.createBufferSource()
+    noise.buffer = buf
+
+    const filter = ctx.createBiquadFilter()
+    filter.type = 'bandpass'
+    filter.frequency.value = 2200
+    filter.Q.value = 1.0
+
+    const noiseGain = ctx.createGain()
+    noiseGain.gain.setValueAtTime(0, t)
+    noiseGain.gain.linearRampToValueAtTime(0.18, t + 0.06)
+    noiseGain.gain.setValueAtTime(0.18, t + 0.65)
+    noiseGain.gain.linearRampToValueAtTime(0, t + 1.0)
+
+    noise.connect(filter)
+    filter.connect(noiseGain)
+    noiseGain.connect(ctx.destination)
+    noise.start(t)
+
+    // Rail rings — 3 metallic tings sliding along the pole
+    ;[0.04, 0.28, 0.52].forEach(offset => {
+      const osc = ctx.createOscillator()
+      osc.type = 'sine'
+      osc.frequency.setValueAtTime(1600, t + offset)
+      osc.frequency.exponentialRampToValueAtTime(380, t + offset + 0.14)
+
+      const ringGain = ctx.createGain()
+      ringGain.gain.setValueAtTime(0.07, t + offset)
+      ringGain.gain.exponentialRampToValueAtTime(0.001, t + offset + 0.18)
+
+      osc.connect(ringGain)
+      ringGain.connect(ctx.destination)
+      osc.start(t + offset)
+      osc.stop(t + offset + 0.2)
+    })
+  } catch {
+    // AudioContext not available
+  }
+}
+
 export default function FooterSection() {
   const [curtainsVisible, setCurtainsVisible] = useState(false)
   const [mounted, setMounted] = useState(false)
@@ -509,6 +560,7 @@ export default function FooterSection() {
   useEffect(() => setMounted(true), [])
 
   const handleSleep = () => {
+    playCurtainSound()
     setCurtainsVisible(true)
     setTimeout(() => window.scrollTo({ top: 0 }), 850)
     setTimeout(() => setCurtainsVisible(false), 1500)
