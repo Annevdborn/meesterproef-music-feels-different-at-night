@@ -49,8 +49,9 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
+            onClick={onClose}
           >
-            <div className="relative flex flex-col md:flex-row w-full max-w-5xl h-[88vh] shadow-2xl">
+            <div className="relative flex flex-col md:flex-row w-full max-w-5xl h-[88vh] shadow-2xl" onClick={e => e.stopPropagation()}>
               {/* Close button */}
               <button
                 onClick={onClose}
