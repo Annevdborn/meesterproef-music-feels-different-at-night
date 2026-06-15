@@ -142,7 +142,7 @@ export default function Turntable({ song, onOpenSleeve, onClose }: TurntableProp
               <h2 className="font-serif text-[clamp(1.5rem,3vw,2.5rem)] leading-[1.1] text-cream mb-2">
                 {song.title}
               </h2>
-              <p className="font-grotesk text-[13px] text-cream-muted">{song.artist}</p>
+              <p className="font-grotesk text-[13px] text-cream-muted uppercase tracking-widest">{song.artist}</p>
             </motion.div>
           </AnimatePresence>
 

@@ -265,7 +265,7 @@ const SongRow = memo(function SongRow({ song, index, isPlaying, onPlay, onOpenSl
             {song.title}
           </h3>
 
-          <p className="font-grotesk text-[12px] text-cream-dim mb-5">{song.artist}</p>
+          <p className="font-grotesk text-[12px] text-cream-dim mb-5 uppercase tracking-widest">{song.artist}</p>
 
           <div className="h-px w-8 mb-5" style={{ background: `${song.coverAccent}50` }} />
 

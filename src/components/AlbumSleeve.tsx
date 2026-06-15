@@ -102,7 +102,7 @@ export default function AlbumSleeve({ song, isOpen, onClose }: AlbumSleeveProps)
                       <h3 className="font-serif text-[clamp(1.2rem,2.5vw,1.8rem)] text-cream leading-tight mb-1">
                         {song.title}
                       </h3>
-                      <p className="font-grotesk text-[12px] text-cream-dim mb-6">{song.artist}</p>
+                      <p className="font-grotesk text-[12px] text-cream-dim mb-6 uppercase tracking-widest">{song.artist}</p>
                       <div
                         className="h-px w-10 mb-6"
                         style={{ background: `${song.coverAccent}50` }}
