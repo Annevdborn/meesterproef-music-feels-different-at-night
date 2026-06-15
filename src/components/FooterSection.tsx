@@ -502,62 +502,6 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
   )
 }
 
-function playCurtainSound() {
-  try {
-    const ctx = new (window.AudioContext || (window as never as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)()
-    const t = ctx.currentTime
-
-    const makeNoiseBuf = (dur: number) => {
-      const buf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate)
-      const d = buf.getChannelData(0)
-      for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1
-      const src = ctx.createBufferSource()
-      src.buffer = buf
-      return src
-    }
-
-    // Main swoosh — low-mid body of the curtain movement
-    const swoosh = makeNoiseBuf(1.1)
-    const swooshF = ctx.createBiquadFilter()
-    swooshF.type = 'bandpass'
-    swooshF.frequency.value = 500
-    swooshF.Q.value = 0.6
-    const swooshG = ctx.createGain()
-    swooshG.gain.setValueAtTime(0, t)
-    swooshG.gain.linearRampToValueAtTime(0.45, t + 0.12)
-    swooshG.gain.setValueAtTime(0.45, t + 0.65)
-    swooshG.gain.linearRampToValueAtTime(0, t + 1.1)
-    swoosh.connect(swooshF); swooshF.connect(swooshG); swooshG.connect(ctx.destination)
-    swoosh.start(t)
-
-    // Fabric rustle — high-frequency texture of the cloth
-    const rustle = makeNoiseBuf(1.0)
-    const rustleF = ctx.createBiquadFilter()
-    rustleF.type = 'highpass'
-    rustleF.frequency.value = 2800
-    const rustleG = ctx.createGain()
-    rustleG.gain.setValueAtTime(0, t)
-    rustleG.gain.linearRampToValueAtTime(0.12, t + 0.08)
-    rustleG.gain.setValueAtTime(0.12, t + 0.6)
-    rustleG.gain.linearRampToValueAtTime(0, t + 0.9)
-    rustle.connect(rustleF); rustleF.connect(rustleG); rustleG.connect(ctx.destination)
-    rustle.start(t)
-
-    // Soft thud — curtains meeting in the middle
-    const thud = makeNoiseBuf(0.3)
-    const thudF = ctx.createBiquadFilter()
-    thudF.type = 'lowpass'
-    thudF.frequency.value = 180
-    const thudG = ctx.createGain()
-    thudG.gain.setValueAtTime(0, t + 0.78)
-    thudG.gain.linearRampToValueAtTime(0.35, t + 0.84)
-    thudG.gain.linearRampToValueAtTime(0, t + 1.0)
-    thud.connect(thudF); thudF.connect(thudG); thudG.connect(ctx.destination)
-    thud.start(t + 0.78)
-  } catch {
-    // AudioContext not available
-  }
-}
 
 export default function FooterSection() {
   const [curtainsVisible, setCurtainsVisible] = useState(false)
@@ -566,7 +510,6 @@ export default function FooterSection() {
   useEffect(() => setMounted(true), [])
 
   const handleSleep = () => {
-    playCurtainSound()
     setCurtainsVisible(true)
     setTimeout(() => window.scrollTo({ top: 0 }), 850)
     setTimeout(() => setCurtainsVisible(false), 1500)
