@@ -133,97 +133,50 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
       {/* Vinyl animation */}
       <div ref={vinylRef} className="w-full relative" style={{ paddingBottom: 'min(18vw, 185px)' }}>
         <div className="flex justify-center" style={{ position: 'relative', zIndex: 1 }}>
-          <motion.div style={{ width: '110vw', height: '110vw', maxWidth: 1200, maxHeight: 1200, y: vinylY }}>
-            <svg
-              viewBox="0 0 200 200"
-              width="100%"
-              height="100%"
-              style={{ filter: 'drop-shadow(0 0 80px rgba(200,169,110,0.08))' }}
-              aria-hidden="true"
-            >
+          <motion.div style={{ width: '110vw', height: '110vw', maxWidth: 1200, maxHeight: 1200, y: vinylY, willChange: 'transform' }}>
+            <svg viewBox="0 0 200 200" width="100%" height="100%" aria-hidden="true">
               <defs>
-                {/* Moon surface — gradient only, no expensive filters */}
-                <radialGradient id="vs2-moonbase" cx="36%" cy="30%" r="65%">
-                  <stop offset="0%"   stopColor="#dedad2" />
-                  <stop offset="35%"  stopColor="#b4b0a8" />
-                  <stop offset="70%"  stopColor="#7e7a74" />
-                  <stop offset="100%" stopColor="#48443e" />
+                <radialGradient id="vf-base" cx="35%" cy="30%" r="75%">
+                  <stop offset="0%"   stopColor="#1c1628" />
+                  <stop offset="50%"  stopColor="#0e0a18" />
+                  <stop offset="100%" stopColor="#060410" />
                 </radialGradient>
-                {/* Dark patch — mare imbrium / large dark plain upper-left */}
-                <radialGradient id="vs2-mare1" cx="30%" cy="35%" r="30%">
-                  <stop offset="0%"   stopColor="rgba(52,48,44,0.7)" />
+                <radialGradient id="vf-sheen" cx="30%" cy="26%" r="58%">
+                  <stop offset="0%"   stopColor="rgba(180,160,240,0.32)" />
+                  <stop offset="45%"  stopColor="rgba(110,90,190,0.1)" />
                   <stop offset="100%" stopColor="transparent" />
                 </radialGradient>
-                {/* Dark patch lower-right */}
-                <radialGradient id="vs2-mare2" cx="68%" cy="65%" r="25%">
-                  <stop offset="0%"   stopColor="rgba(48,44,40,0.55)" />
-                  <stop offset="100%" stopColor="transparent" />
-                </radialGradient>
-                {/* Sunlit highlight */}
-                <radialGradient id="vs2-sunlit" cx="28%" cy="26%" r="48%">
-                  <stop offset="0%"   stopColor="rgba(255,252,244,0.5)" />
-                  <stop offset="60%"  stopColor="rgba(240,236,228,0.1)" />
-                  <stop offset="100%" stopColor="transparent" />
-                </radialGradient>
-                {/* Limb darkening */}
-                <radialGradient id="vs2-limb" cx="50%" cy="50%" r="50%">
-                  <stop offset="72%"  stopColor="transparent" />
-                  <stop offset="90%"  stopColor="rgba(28,24,20,0.55)" />
-                  <stop offset="100%" stopColor="rgba(8,6,4,0.94)" />
+                <radialGradient id="vf-edge" cx="50%" cy="50%" r="50%">
+                  <stop offset="78%"  stopColor="transparent" />
+                  <stop offset="93%"  stopColor="rgba(0,0,0,0.7)" />
+                  <stop offset="100%" stopColor="rgba(0,0,0,0.95)" />
                 </radialGradient>
               </defs>
 
-              {/* Moon base */}
-              <circle cx="100" cy="100" r="99" fill="url(#vs2-moonbase)" />
-              {/* Dark maria — gradient patches, zero filter cost */}
-              <circle cx="100" cy="100" r="99" fill="url(#vs2-mare1)" />
-              <circle cx="100" cy="100" r="99" fill="url(#vs2-mare2)" />
+              {/* Dark vinyl base */}
+              <circle cx="100" cy="100" r="99" fill="url(#vf-base)" />
 
-              {/* Craters — rim ring + dark floor + bright central peak */}
-              <circle cx="62"  cy="58"  r="9"   fill="rgba(46,42,38,0.4)" />
-              <circle cx="62"  cy="58"  r="9"   fill="none" stroke="rgba(200,196,188,0.45)" strokeWidth="1.2" />
-              <circle cx="63"  cy="57"  r="2.2" fill="rgba(220,216,208,0.35)" />
-
-              <circle cx="138" cy="70"  r="6.5" fill="rgba(44,40,36,0.38)" />
-              <circle cx="138" cy="70"  r="6.5" fill="none" stroke="rgba(190,186,178,0.38)" strokeWidth="1" />
-
-              <circle cx="76"  cy="140" r="12"  fill="rgba(48,44,40,0.42)" />
-              <circle cx="76"  cy="140" r="12"  fill="none" stroke="rgba(195,191,183,0.4)" strokeWidth="1.4" />
-              <circle cx="77"  cy="139" r="2.8" fill="rgba(215,211,203,0.3)" />
-
-              <circle cx="150" cy="132" r="7"   fill="rgba(44,40,36,0.35)" />
-              <circle cx="150" cy="132" r="7"   fill="none" stroke="rgba(185,181,173,0.35)" strokeWidth="1" />
-
-              <circle cx="120" cy="46"  r="4.5" fill="rgba(42,38,34,0.32)" />
-              <circle cx="120" cy="46"  r="4.5" fill="none" stroke="rgba(188,184,176,0.32)" strokeWidth="0.8" />
-
-              <circle cx="40"  cy="114" r="5.5" fill="rgba(44,40,36,0.34)" />
-              <circle cx="40"  cy="114" r="5.5" fill="none" stroke="rgba(186,182,174,0.34)" strokeWidth="0.9" />
-
-              <circle cx="160" cy="88"  r="3.5" fill="rgba(40,36,32,0.3)" />
-              <circle cx="160" cy="88"  r="3.5" fill="none" stroke="rgba(182,178,170,0.3)" strokeWidth="0.7" />
-
-              {/* Vinyl grooves — warm grey, subtle on lunar surface */}
-              {Array.from({ length: 55 }, (_, i) => (
+              {/* Grooves — 22 rings, clearly visible on dark background */}
+              {Array.from({ length: 22 }, (_, i) => (
                 <circle
                   key={i}
                   cx="100" cy="100"
-                  r={28 + i * 1.3}
+                  r={30 + i * 3.1}
                   fill="none"
-                  stroke={i % 4 === 0 ? 'rgba(72,68,62,0.32)' : 'rgba(90,86,80,0.16)'}
-                  strokeWidth="0.55"
-                  opacity={0.65 - i * 0.004}
+                  stroke={i % 2 === 0 ? 'rgba(210,190,255,0.2)' : 'rgba(140,120,210,0.08)'}
+                  strokeWidth={i % 2 === 0 ? 0.8 : 0.4}
                 />
               ))}
 
-              {/* Sunlit zone + limb darkening on top */}
-              <circle cx="100" cy="100" r="99" fill="url(#vs2-sunlit)" />
-              <circle cx="100" cy="100" r="99" fill="url(#vs2-limb)" />
+              {/* Iridescent sheen */}
+              <circle cx="100" cy="100" r="99" fill="url(#vf-sheen)" />
+              {/* Edge darkening */}
+              <circle cx="100" cy="100" r="99" fill="url(#vf-edge)" />
 
-              {/* Center label — crater-like */}
-              <circle cx="100" cy="100" r="26" fill="#3a3630" />
-              <circle cx="100" cy="100" r="26" fill="none" stroke="rgba(165,160,150,0.28)" strokeWidth="1" />
-              <circle cx="100" cy="100" r="4"  fill="#1c1814" />
+              {/* Center label */}
+              <circle cx="100" cy="100" r="22" fill="#08060e" />
+              <circle cx="100" cy="100" r="22" fill="none" stroke="rgba(160,140,220,0.25)" strokeWidth="0.8" />
+              <circle cx="100" cy="100" r="3"  fill="#14101e" />
             </svg>
           </motion.div>
         </div>
