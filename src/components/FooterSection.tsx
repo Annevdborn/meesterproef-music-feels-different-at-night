@@ -117,109 +117,105 @@ function ShootingStar({ top, left, delay }: { top: string; left: string; delay: 
 }
 
 function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
-  const vinylRef = useRef<HTMLDivElement>(null)
+  const spacerRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
-  const inView = useInView(contentRef, { once: true, margin: '-80px' })
+  const inView = useInView(contentRef, { once: true, margin: '-30%' })
 
   const { scrollYProgress } = useScroll({
-    target: vinylRef,
-    offset: ['start end', 'end end'],
+    target: spacerRef,
+    offset: ['start start', 'end end'],
   })
 
-  const vinylY = useTransform(scrollYProgress, [0, 1], ['0%', '65%'])
+  const vinylY = useTransform(scrollYProgress, [0, 0.9], ['0%', '90%'])
 
   return (
     <div>
-      {/* Vinyl animation */}
-      <div ref={vinylRef} className="w-full relative" style={{ paddingBottom: 'min(18vw, 185px)' }}>
-        <div className="flex justify-center" style={{ position: 'relative', zIndex: 1 }}>
+      {/* Spacer — sticky vinyl animates while this scrolls through viewport */}
+      <div ref={spacerRef} style={{ height: '140vh' }}>
+        <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}>
+          <div className="flex justify-center" style={{ position: 'absolute', top: 0, left: 0, right: 0 }}>
           <motion.div style={{ width: '110vw', height: '110vw', maxWidth: 1200, maxHeight: 1200, y: vinylY, willChange: 'transform' }}>
-            <svg viewBox="0 0 200 200" width="100%" height="100%" aria-hidden="true">
+            <svg viewBox="0 0 400 400" width="100%" height="100%" aria-hidden="true">
               <defs>
-                <radialGradient id="vf-base" cx="35%" cy="30%" r="75%">
-                  <stop offset="0%"   stopColor="#0b1a38" />
-                  <stop offset="50%"  stopColor="#060d24" />
-                  <stop offset="100%" stopColor="#02070f" />
+                <radialGradient id="vf-base" cx="38%" cy="32%" r="70%">
+                  <stop offset="0%"   stopColor="#0a1628" />
+                  <stop offset="55%"  stopColor="#040c18" />
+                  <stop offset="100%" stopColor="#010408" />
                 </radialGradient>
-                {/* Moon surface patch upper-left */}
-                <radialGradient id="vf-mare" cx="32%" cy="34%" r="34%">
-                  <stop offset="0%"   stopColor="rgba(8,18,55,0.7)" />
-                  <stop offset="100%" stopColor="transparent" />
-                </radialGradient>
-                {/* Moonlight glow — cold night blue */}
-                <radialGradient id="vf-moon" cx="28%" cy="24%" r="55%">
-                  <stop offset="0%"   stopColor="rgba(160,200,255,0.28)" />
-                  <stop offset="50%"  stopColor="rgba(120,170,245,0.09)" />
-                  <stop offset="100%" stopColor="transparent" />
+                <radialGradient id="vf-sheen" cx="38%" cy="35%" r="55%">
+                  <stop offset="0%"  stopColor="white" stopOpacity="0.05" />
+                  <stop offset="60%" stopColor="white" stopOpacity="0" />
                 </radialGradient>
                 <radialGradient id="vf-edge" cx="50%" cy="50%" r="50%">
-                  <stop offset="78%"  stopColor="transparent" />
-                  <stop offset="93%"  stopColor="rgba(0,0,0,0.72)" />
-                  <stop offset="100%" stopColor="rgba(0,0,0,0.96)" />
+                  <stop offset="88%" stopColor="transparent" />
+                  <stop offset="95%" stopColor="#0a0a1a" stopOpacity="0.6" />
+                  <stop offset="100%" stopColor="#050510" stopOpacity="0.9" />
                 </radialGradient>
               </defs>
 
               {/* Dark vinyl base */}
-              <circle cx="100" cy="100" r="99" fill="url(#vf-base)" />
+              <circle cx="200" cy="200" r="198" fill="url(#vf-base)" />
 
-              {/* Grooves — 20 rings */}
-              {Array.from({ length: 20 }, (_, i) => (
-                <circle key={i} cx="100" cy="100" r={30 + i * 3.3}
-                  fill="none"
-                  stroke={i % 2 === 0 ? 'rgba(120,180,255,0.24)' : 'rgba(70,130,220,0.1)'}
-                  strokeWidth={i % 2 === 0 ? 0.75 : 0.38}
-                />
-              ))}
-
-              {/* Moon surface patches */}
-              <circle cx="100" cy="100" r="99" fill="url(#vf-mare)" />
-              <circle cx="100" cy="100" r="99" fill="url(#vf-moon)" />
-
-              {/* Craters — minimal, 2 elements each */}
-              <circle cx="62"  cy="57"  r="8"   fill="rgba(4,10,35,0.6)" />
-              <circle cx="62"  cy="57"  r="8"   fill="none" stroke="rgba(130,185,255,0.32)" strokeWidth="0.9" />
-              <circle cx="138" cy="72"  r="5.5" fill="rgba(4,8,32,0.55)" />
-              <circle cx="138" cy="72"  r="5.5" fill="none" stroke="rgba(120,178,252,0.27)" strokeWidth="0.7" />
-              <circle cx="76"  cy="142" r="10"  fill="rgba(4,10,36,0.5)" />
-              <circle cx="76"  cy="142" r="10"  fill="none" stroke="rgba(125,182,253,0.3)" strokeWidth="0.85" />
+              {/* Grooves — 68 rings matching VinylDisc */}
+              {Array.from({ length: 68 }, (_, i) => {
+                const r = 62 + i * 1.9
+                return (
+                  <circle key={i} cx="200" cy="200" r={r}
+                    fill="none"
+                    stroke={i % 4 === 0 ? 'rgba(80,130,220,0.32)' : 'rgba(50,90,180,0.14)'}
+                    strokeWidth="0.7"
+                    opacity={0.5 - i * 0.002}
+                  />
+                )
+              })}
 
               {/* Stars — tiny dots scattered across the surface */}
-              <circle cx="45"  cy="34"  r="0.9" fill="rgba(225,230,255,0.75)" />
-              <circle cx="156" cy="46"  r="0.7" fill="rgba(225,230,255,0.6)"  />
-              <circle cx="170" cy="128" r="0.8" fill="rgba(225,230,255,0.65)" />
-              <circle cx="30"  cy="155" r="0.6" fill="rgba(225,230,255,0.55)" />
-              <circle cx="166" cy="72"  r="0.6" fill="rgba(225,230,255,0.5)"  />
-              <circle cx="37"  cy="90"  r="0.7" fill="rgba(225,230,255,0.55)" />
-              <circle cx="120" cy="168" r="0.5" fill="rgba(225,230,255,0.45)" />
+              <circle cx="90"  cy="68"  r="1.8" fill="rgba(225,230,255,0.75)" />
+              <circle cx="312" cy="92"  r="1.4" fill="rgba(225,230,255,0.60)" />
+              <circle cx="340" cy="256" r="1.6" fill="rgba(225,230,255,0.65)" />
+              <circle cx="60"  cy="310" r="1.2" fill="rgba(225,230,255,0.55)" />
+              <circle cx="332" cy="144" r="1.2" fill="rgba(225,230,255,0.50)" />
+              <circle cx="74"  cy="180" r="1.4" fill="rgba(225,230,255,0.55)" />
+              <circle cx="240" cy="336" r="1.0" fill="rgba(225,230,255,0.45)" />
+              <circle cx="155" cy="52"  r="1.0" fill="rgba(225,230,255,0.50)" />
+              <circle cx="358" cy="188" r="0.9" fill="rgba(225,230,255,0.40)" />
 
-              {/* Edge darkening */}
-              <circle cx="100" cy="100" r="99" fill="url(#vf-edge)" />
+              {/* Sheen & edge */}
+              <circle cx="200" cy="200" r="198" fill="url(#vf-sheen)" />
+              <circle cx="200" cy="200" r="198" fill="url(#vf-edge)" />
 
               {/* Center label */}
-              <circle cx="100" cy="100" r="22" fill="#030710" />
-              <circle cx="100" cy="100" r="22" fill="none" stroke="rgba(100,165,245,0.28)" strokeWidth="0.7" />
-              <circle cx="100" cy="100" r="2.8" fill="#060e1e" />
+              <circle cx="200" cy="200" r="58" fill="#030b18" />
+              <circle cx="200" cy="200" r="56" fill="none" stroke="rgba(100,165,245,0.20)" strokeWidth="1" />
+              <circle cx="200" cy="200" r="48" fill="none" stroke="rgba(80,140,220,0.10)" strokeWidth="0.5" />
+              <circle cx="200" cy="200" r="52" fill="none" stroke="rgba(120,170,255,0.28)" strokeWidth="1.5" />
+              <text x="200" y="193" textAnchor="middle" fill="rgba(200,220,255,0.70)" fontSize="7.5" fontFamily="Georgia, serif" letterSpacing="0.5">Music Feels Different</text>
+              <text x="200" y="205" textAnchor="middle" fill="rgba(180,200,255,0.40)" fontSize="5.5" fontFamily="Arial, sans-serif" letterSpacing="1">AT NIGHT</text>
+              <text x="200" y="216" textAnchor="middle" fill="rgba(150,180,255,0.25)" fontSize="5" fontFamily="Arial, sans-serif">Side A</text>
+
+              {/* Spindle hole */}
+              <circle cx="200" cy="200" r="4.5" fill="#040c1a" />
+              <circle cx="200" cy="200" r="4.5" fill="none" stroke="#1a2840" strokeWidth="0.5" />
             </svg>
           </motion.div>
-        </div>
+          </div>
 
-        {/* Sleeve opening — no hard border, fades in from the vinyl shadow */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 'min(68vw, 730px)',
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: 2,
-            background: 'linear-gradient(180deg, #04050d 0%, #04050d 100%)',
-          }}
-        >
-          {/* soft shadow where vinyl enters */}
-          <div style={{
-            position: 'absolute', top: 0, left: 0, right: 0, height: 120,
-            background: 'linear-gradient(to bottom, rgba(0,0,4,0.98), transparent)',
-          }} />
+          {/* Sleeve opening */}
+          <div
+            style={{
+              position: 'absolute',
+              top: 'min(76vw, 820px)',
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: '#04050d',
+            }}
+          >
+            <div style={{
+              position: 'absolute', top: 0, left: 0, right: 0, height: 120,
+              background: 'linear-gradient(to bottom, rgba(0,0,4,0.98), transparent)',
+            }} />
+          </div>
         </div>
       </div>
 
@@ -229,11 +225,10 @@ function VinylIntoSleeve({ onSleep }: { onSleep: () => void }) {
         style={{
           position: 'relative',
           zIndex: 3,
-          marginTop: 'calc(-1 * min(62vw, 670px))',
+          marginTop: '-100vh',
+          background: '#04050d',
           overflow: 'hidden',
-          // fades in seamlessly from the vinyl container above
-          background: 'linear-gradient(180deg, transparent 0%, rgba(4,5,13,0.85) 6%, #04050d 14%)',
-          paddingTop: '3rem',
+          paddingTop: '8rem',
           paddingBottom: '5rem',
           paddingLeft: 'clamp(2rem, 8vw, 8rem)',
           paddingRight: 'clamp(2rem, 8vw, 8rem)',
